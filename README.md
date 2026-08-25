@@ -1,6 +1,6 @@
 # Jeruz Garde — Digital Studio Portfolio
 
-A premium, conversion-focused portfolio for **Jeruz Laynell J. Garde** (`Presidentkoko`). The site presents full-stack development, business systems, automation, LinkedIn and social-media management, graphic design, and content production through verified project data and real portfolio assets.
+A premium, conversion-focused portfolio for **Jeruz Laynell J. Garde** (`Presidentkoko`). The site presents full-stack development, business systems, verified n8n automations, custom WordPress work, LinkedIn and social-media management, graphic design, and content production through source-backed project data and real portfolio assets.
 
 The front end remains intentionally lightweight: semantic HTML, custom CSS, and vanilla JavaScript. A small Vercel function handles project inquiries through Resend.
 
@@ -9,7 +9,9 @@ The front end remains intentionally lightweight: semantic HTML, custom CSS, and 
 - Cinematic, responsive hero with a lightweight particle field and rotating professional roles
 - Sticky navigation, animated mobile menu, custom desktop cursor, magnetic buttons, and reduced-motion support
 - Customer-focused value and service sections
-- Filterable development and multidisciplinary project case studies
+- Filterable project case studies for Featured, WordPress, n8n Automation, Web Development, Full-Stack Systems, and UI/UX work
+- Dedicated AI & Automation section with a lightweight lead-flow diagram and implementation-level n8n case studies
+- Dedicated WordPress section with verified custom-theme projects and a transparent Santech evidence request
 - Dedicated LinkedIn and social-media growth-management case study
 - Filterable creative-work gallery with a keyboard-accessible fullscreen lightbox
 - Client process, grouped technology stack, and verified experience timeline
@@ -26,7 +28,9 @@ The front end remains intentionally lightweight: semantic HTML, custom CSS, and 
 ├── assets/
 │   ├── docs/                # CV and PDF portfolio
 │   ├── images/              # Project visuals
-│   │   └── creative/        # Optimised creative gallery assets
+│   │   ├── automation/      # Verified n8n workflow proof
+│   │   ├── creative/        # Optimised creative gallery assets
+│   │   └── wordpress/       # WordPress theme screenshots
 │   └── videos/              # Existing demo and aerial media
 ├── css/styles.css           # Complete visual system and responsive layout
 ├── js/
@@ -54,6 +58,7 @@ Most updates are made in [`js/data.js`](js/data.js):
 - `values` — credibility/value cards
 - `services` — client problem, deliverables, benefit, and CTA for each service
 - `projects` — full case-study records, images, technology, and verified links
+- `wordpressVerification` — evidence still required before the Santech case study can be attributed and published
 - `creativeWork` — gallery images, categories, titles, and formats
 - `growthServices` — LinkedIn/social management deliverables
 - `process` — client delivery stages
@@ -109,12 +114,19 @@ No secrets belong in the repository. `.env.example` contains names and safe plac
 - Core-N-Core: <https://presidentkoko.github.io/Core-N-Core/>
 - Premium Uppal: <https://presidentkoko.github.io/Premium-Uppal/>
 - Uppal Group Website: <https://presidentkoko.github.io/Uppal-Group-Website/>
+- AI Lead Qualification: <https://github.com/Presidentkoko/ai-lead-qualification>
+- Automated SEO Monitoring: <https://github.com/Presidentkoko/Automated-SEO-monitoring>
+- Social Media Automation: <https://github.com/Presidentkoko/social-media-automation>
+- Telegram Appointment Agent: <https://github.com/Presidentkoko/appointment-voice-agent>
+- MEBS Construction WordPress: <https://github.com/Presidentkoko/mebs-construction-elementor>
+- Anton Barbershop WordPress: <https://github.com/Presidentkoko/antons-barbershop-wordpress>
 
 Projects without a verified public demo are shown as private or repository-only instead of linking to placeholders.
 
 ## Add later
 
 - Final Vercel/custom domain in `SITE_URL`
+- Santech WordPress source/theme or export, approved screenshots, confirmed live URL, and implementation notes; the current workspace and connected repositories do not contain enough evidence to publish it as a verified WordPress case study
 - Resend credentials and a verified sender domain
 - Verified analytics screenshots or outcome metrics for growth-management work, if they can be published
 - Additional campaign visuals or video thumbnails as they become available

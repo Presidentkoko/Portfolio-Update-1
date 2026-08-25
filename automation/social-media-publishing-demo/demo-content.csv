@@ -1,0 +1,4 @@
+content_id,scheduled_at,title,base_caption,media_url,platforms,status
+POST-001,2026-08-24T09:00:00+08:00,Free SEO Audit,Want to know what is holding your website back? Get a free SEO audit today.,https://example.com/media/seo-audit.jpg,"Instagram,Facebook,LinkedIn,TikTok",Ready
+POST-002,2026-08-25T14:00:00+08:00,Automation Case Study,I reduced repetitive lead handling with a simple automation workflow.,https://example.com/media/automation.jpg,"Instagram,Facebook,LinkedIn",Ready
+POST-003,2026-08-26T10:00:00+08:00,Incomplete Demo,,https://example.com/media/missing-caption.jpg,"Instagram,LinkedIn",Ready

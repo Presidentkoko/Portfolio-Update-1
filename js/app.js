@@ -108,7 +108,7 @@
   }
 
   function renderProjectFilters() {
-    const categories = ["All", ...new Set(data.projects.map((project) => project.category))];
+    const categories = ["All", "Featured", "WordPress", "n8n Automation", "Web Development", "Full-Stack Systems", "UI/UX"];
     $("#project-filters").innerHTML = categories.map((category, index) => `
       <button class="filter-button${index === 0 ? " active" : ""}" type="button" data-filter="${escapeHtml(category)}" aria-pressed="${index === 0}">${escapeHtml(category)}</button>`).join("");
 
@@ -120,7 +120,8 @@
         });
         const filter = button.dataset.filter;
         $$("#project-grid .project-card").forEach((card) => {
-          card.classList.toggle("is-hidden", filter !== "All" && card.dataset.category !== filter);
+          const filters = card.dataset.filters.split("|");
+          card.classList.toggle("is-hidden", filter !== "All" && !filters.includes(filter));
         });
         $("#project-grid").scrollTo({ left: 0, behavior: "auto" });
         renderProjectDots();
@@ -135,7 +136,7 @@
 
   function renderProjects() {
     $("#project-grid").innerHTML = data.projects.map((project) => `
-      <article class="project-card reveal" data-category="${escapeHtml(project.category)}" data-title="${escapeHtml(project.title)}">
+      <article class="project-card reveal" data-category="${escapeHtml(project.category)}" data-filters="${escapeHtml((project.filters || []).join("|"))}" data-title="${escapeHtml(project.title)}">
         <div class="project-media">
           <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.alt)}" loading="lazy" width="900" height="620">
           <div class="project-top"><span>${escapeHtml(project.category)}</span>${project.featured ? "<span>Selected work</span>" : ""}</div>
@@ -144,11 +145,15 @@
           <p class="project-kicker">${escapeHtml(project.kicker)}</p>
           <h3>${escapeHtml(project.title)}</h3>
           <p>${escapeHtml(project.summary)}</p>
+          <p class="project-role"><span>My role</span>${escapeHtml(project.role)}</p>
+          <ul class="project-feature-preview">${project.features.slice(0, 3).map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
           <div class="project-tech">${project.tech.slice(0, 5).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>
           <div class="project-actions">
             <button class="button button-primary project-details" type="button" data-slug="${escapeHtml(project.slug)}">View case study ↗</button>
             ${project.live ? projectLink(project.live, "Live demo") : ""}
-            ${!project.live && project.private ? '<span class="private-label">Private project / no public link</span>' : ""}
+            ${project.github ? projectLink(project.github, "GitHub repository") : ""}
+            ${project.download ? projectLink(project.download, "Download workflow") : ""}
+            ${!project.live && !project.download && project.private ? '<span class="private-label">Private project / no public link</span>' : ""}
           </div>
         </div>
       </article>`).join("");
@@ -169,10 +174,55 @@
     renderProjectDots();
   }
 
+  function caseStudyCard(project) {
+    const status = project.caseDetails?.find((item) => item[0] === "Status")?.[1] || "Verified project evidence";
+    return `
+      <article class="specialism-card reveal">
+        <div class="specialism-media">
+          <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.alt)}" loading="lazy" width="900" height="620">
+          <span>${escapeHtml(project.kicker)}</span>
+        </div>
+        <div class="specialism-body">
+          <h3>${escapeHtml(project.title)}</h3>
+          <p>${escapeHtml(project.summary)}</p>
+          <dl><div><dt>My role</dt><dd>${escapeHtml(project.role)}</dd></div><div><dt>Status</dt><dd>${escapeHtml(status)}</dd></div></dl>
+          <ul>${project.features.slice(0, 4).map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
+          <div class="specialism-actions">
+            <button class="button button-primary case-study-details" type="button" data-slug="${escapeHtml(project.slug)}">View full case study ↗</button>
+            ${project.github ? projectLink(project.github, "GitHub repository") : ""}
+            ${project.download ? projectLink(project.download, "Workflow file") : ""}
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderSpecialisms() {
+    const automations = data.projects.filter((project) => project.category === "n8n Automation");
+    const wordpress = data.projects.filter((project) => project.category === "WordPress");
+    $("#automation-projects").innerHTML = automations.map(caseStudyCard).join("");
+
+    const pending = data.wordpressVerification;
+    $("#wordpress-projects").innerHTML = `
+      <article class="specialism-card verification-card reveal">
+        <div class="verification-mark" aria-hidden="true">01</div>
+        <div class="specialism-body">
+          <p class="project-kicker">${escapeHtml(pending.status)}</p>
+          <h3>${escapeHtml(pending.title)}</h3>
+          <p>${escapeHtml(pending.summary)}</p>
+          <div class="verification-request"><span>Needed to publish this case study</span><ul>${pending.requested.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+          <a class="button button-outline" href="#contact" data-project-type="Santech project evidence">Supply project evidence</a>
+        </div>
+      </article>
+      ${wordpress.map(caseStudyCard).join("")}`;
+
+    $$(".case-study-details").forEach((button) => button.addEventListener("click", () => openProject(button.dataset.slug)));
+  }
+
   function openProject(slug) {
     const project = data.projects.find((item) => item.slug === slug);
     const dialog = $("#project-modal");
     if (!project || !dialog) return;
+    if (window.location.hash !== `#case-${slug}`) history.replaceState(null, "", `#case-${slug}`);
 
     $("#modal-content").innerHTML = `
       <button class="dialog-close" id="project-close" type="button" aria-label="Close case study">×</button>
@@ -210,11 +260,13 @@
           <div><h3>My role</h3><p>${escapeHtml(project.role)}</p></div>
           <div><h3>Important features</h3><ul class="feature-list">${project.features.map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul></div>
         </div>
+        ${project.caseDetails?.length ? `<section class="modal-spec" aria-label="Detailed case study"><h3>Implementation details</h3><div class="modal-spec-grid">${project.caseDetails.map(([label, value]) => `<article><span>${escapeHtml(label)}</span><p>${escapeHtml(value)}</p></article>`).join("")}</div></section>` : ""}
         <div class="modal-tech">${project.tech.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>
         <div class="modal-actions">
           ${projectLink(project.live, "Visit live site", true)}
           ${projectLink(project.github, "View GitHub")}
-          ${project.private ? '<span class="private-label">Private project — public link intentionally omitted.</span>' : ""}
+          ${project.download ? projectLink(project.download, "Download n8n workflow", true) : ""}
+          ${project.private && !project.download ? '<span class="private-label">Private project — public link intentionally omitted.</span>' : ""}
           <a class="button button-outline" href="#contact" data-project-type="${escapeHtml(project.title)}">Start a similar project</a>
         </div>
       </div>`;
@@ -713,8 +765,14 @@
       dialog.addEventListener("close", () => {
         document.body.classList.remove("dialog-open");
         $$("video", dialog).forEach((video) => video.pause());
+        if (dialog === projectDialog && window.location.hash.startsWith("#case-")) history.replaceState(null, "", "#projects");
       });
     });
+  }
+
+  function initProjectDeepLink() {
+    if (!window.location.hash.startsWith("#case-")) return;
+    openProject(window.location.hash.slice(6));
   }
 
   function initFooter() {
@@ -729,6 +787,7 @@
     renderServices();
     renderProjects();
     renderProjectFilters();
+    renderSpecialisms();
     renderGrowth();
     renderCreative();
     renderCreativeFilters();
@@ -740,6 +799,7 @@
     initCursor();
     initHeroCanvas();
     initDialogs();
+    initProjectDeepLink();
     initProjectPrefill();
     initForm();
     initFooter();

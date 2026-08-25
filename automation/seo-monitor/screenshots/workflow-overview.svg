@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Automated SEO monitoring workflow dashboard</title>
+  <desc id="desc">A dark dashboard showing a sitemap flowing through page audits, PageSpeed checks, SEO rules, Google Sheets, and Telegram reports.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07101f"/><stop offset="1" stop-color="#101b31"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#4f8cff"/><stop offset="1" stop-color="#58d6c7"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1200" height="760" rx="34" fill="url(#bg)"/>
+  <circle cx="1030" cy="-30" r="270" fill="#255fca" opacity=".12"/>
+  <text x="70" y="90" fill="#72a4ff" font-family="Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="3">AUTOMATED SEO MONITOR</text>
+  <text x="70" y="145" fill="#f5f8ff" font-family="Arial, sans-serif" font-size="42" font-weight="700">Weekly site health, without the manual audit.</text>
+  <g font-family="Arial, sans-serif" filter="url(#shadow)">
+    <g transform="translate(70 210)"><rect width="235" height="118" rx="18" fill="#111d32" stroke="#263a59"/><text x="25" y="38" fill="#7f91ad" font-size="14">PAGES CHECKED</text><text x="25" y="84" fill="#fff" font-size="38" font-weight="700">24</text><circle cx="196" cy="61" r="22" fill="#173c72"/><path d="M187 52h18v18h-18z" fill="none" stroke="#72a4ff" stroke-width="2"/></g>
+    <g transform="translate(325 210)"><rect width="235" height="118" rx="18" fill="#111d32" stroke="#263a59"/><text x="25" y="38" fill="#7f91ad" font-size="14">CRITICAL ISSUES</text><text x="25" y="84" fill="#ff7189" font-size="38" font-weight="700">03</text><circle cx="196" cy="61" r="22" fill="#4a2030"/><text x="190" y="69" fill="#ff7189" font-size="25" font-weight="700">!</text></g>
+    <g transform="translate(580 210)"><rect width="235" height="118" rx="18" fill="#111d32" stroke="#263a59"/><text x="25" y="38" fill="#7f91ad" font-size="14">WARNINGS</text><text x="25" y="84" fill="#ffc666" font-size="38" font-weight="700">11</text><circle cx="196" cy="61" r="22" fill="#47351e"/><path d="M196 48l12 22h-24z" fill="none" stroke="#ffc666" stroke-width="2"/></g>
+    <g transform="translate(835 210)"><rect width="295" height="118" rx="18" fill="#111d32" stroke="#263a59"/><text x="25" y="38" fill="#7f91ad" font-size="14">MOBILE PERFORMANCE</text><text x="25" y="84" fill="#58d6c7" font-size="38" font-weight="700">86</text><rect x="102" y="64" width="150" height="10" rx="5" fill="#26364e"/><rect x="102" y="64" width="129" height="10" rx="5" fill="url(#accent)"/></g>
+  </g>
+  <text x="70" y="390" fill="#b4c0d4" font-family="Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="2">WORKFLOW</text>
+  <path d="M170 488H1040" stroke="#2c4466" stroke-width="3" stroke-dasharray="8 8"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(150 488)"><circle r="48" fill="#162943" stroke="#4f8cff" stroke-width="2"/><text y="6" fill="#8cb1ff" font-size="28">⌁</text><text y="82" fill="#eef4ff" font-size="15" font-weight="700">Sitemap</text><text y="104" fill="#7586a3" font-size="12">Collect URLs</text></g>
+    <g transform="translate(375 488)"><circle r="48" fill="#162943" stroke="#4f8cff" stroke-width="2"/><text y="7" fill="#8cb1ff" font-size="25">&lt;/&gt;</text><text y="82" fill="#eef4ff" font-size="15" font-weight="700">Page audit</text><text y="104" fill="#7586a3" font-size="12">Metadata + links</text></g>
+    <g transform="translate(600 488)"><circle r="48" fill="#162943" stroke="#58d6c7" stroke-width="2"/><text y="8" fill="#58d6c7" font-size="28">↯</text><text y="82" fill="#eef4ff" font-size="15" font-weight="700">PageSpeed</text><text y="104" fill="#7586a3" font-size="12">Mobile score</text></g>
+    <g transform="translate(825 488)"><circle r="48" fill="#162943" stroke="#ffc666" stroke-width="2"/><text y="7" fill="#ffc666" font-size="26">✓</text><text y="82" fill="#eef4ff" font-size="15" font-weight="700">SEO rules</text><text y="104" fill="#7586a3" font-size="12">Classify issues</text></g>
+    <g transform="translate(1050 488)"><circle r="48" fill="#162943" stroke="#72a4ff" stroke-width="2"/><text y="7" fill="#72a4ff" font-size="24">▦</text><text y="82" fill="#eef4ff" font-size="15" font-weight="700">Report</text><text y="104" fill="#7586a3" font-size="12">Sheets + Telegram</text></g>
+  </g>
+  <rect x="70" y="650" width="1060" height="48" rx="14" fill="#0c1628" stroke="#243956"/>
+  <circle cx="99" cy="674" r="7" fill="#58d6c7"/><text x="120" y="680" fill="#aebbd0" font-family="Arial, sans-serif" font-size="15">Runs every Monday at 08:00  •  Small-batch crawling  •  $0 local n8n hosting</text>
+</svg>

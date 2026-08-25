@@ -10,7 +10,7 @@ const date = new Date().toISOString().slice(0, 10);
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 
-for (const directory of ["assets", "css", "js"]) {
+for (const directory of ["assets", "automation", "css", "js"]) {
   await cp(path.join(root, directory), path.join(output, directory), { recursive: true });
 }
 

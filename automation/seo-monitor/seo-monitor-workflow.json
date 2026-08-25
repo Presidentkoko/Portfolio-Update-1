@@ -1,0 +1,204 @@
+{
+  "name": "Automated SEO Monitor - Compatible",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Test",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-980, 220]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "weeksInterval": 1,
+              "triggerAtDay": [1],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "weekly-schedule",
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-980, 40]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "sitemap", "name": "sitemapUrl", "value": "https://portfolio-update-1.vercel.app/sitemap.xml", "type": "string" },
+            { "id": "speed-key", "name": "pageSpeedApiKey", "value": "", "type": "string" },
+            { "id": "pages", "name": "maxPages", "value": 25, "type": "number" },
+            { "id": "mobile", "name": "minimumMobileScore", "value": 50, "type": "number" },
+            { "id": "words", "name": "minimumWordCount", "value": 300, "type": "number" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "configuration",
+      "name": "Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-750, 130]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.sitemapUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "download-sitemap",
+      "name": "Download Sitemap",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-520, 130]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst config = $('Configuration').first().json;\nconst xml = response.body ?? response.data ?? '';\nif (!xml) throw new Error('No sitemap XML returned. Check Download Sitemap.');\nconst decode = value => value.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();\nconst urls = [...xml.matchAll(/<loc[^>]*>([\\s\\S]*?)<\\/loc>/gi)].map(match => decode(match[1]));\nreturn [...new Set(urls)].slice(0, Number(config.maxPages || 25)).map(url => ({ json: { ...config, url } }));"
+      },
+      "id": "extract-urls",
+      "name": "Extract Sitemap URLs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-280, 130]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "User-Agent", "value": "LocalSEOAuditBot/1.0 (+site owner audit)" }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "download-page",
+      "name": "Download Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-30, 130]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const response = $json;\nconst source = $('Extract Sitemap URLs').item.json;\nconst html = response.body ?? response.data ?? '';\nconst status = response.statusCode ?? 200;\nconst decode = (value = '') => value.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, String.fromCharCode(34)).replace(/&#39;/g, String.fromCharCode(39)).trim();\nconst title = decode((html.match(/<title[^>]*>([\\s\\S]*?)<\\/title>/i)?.[1] || '').replace(/<[^>]+>/g, ' '));\nconst meta = html.match(/<meta[^>]+name=[\\\"']description[\\\"'][^>]*content=[\\\"']([^\\\"']*)/i) || html.match(/<meta[^>]+content=[\\\"']([^\\\"']*)[\\\"'][^>]+name=[\\\"']description[\\\"']/i);\nconst metaDescription = decode(meta?.[1] || '');\nconst h1Count = [...html.matchAll(/<h1\\b[^>]*>[\\s\\S]*?<\\/h1>/gi)].length;\nconst images = [...html.matchAll(/<img\\b[^>]*>/gi)].map(match => match[0]);\nconst missingAlt = images.filter(tag => !/\\balt\\s*=\\s*[\\\"'][^\\\"']+[\\\"']/i.test(tag)).length;\nconst plainText = decode(html.replace(/<script[\\s\\S]*?<\\/script>/gi, ' ').replace(/<style[\\s\\S]*?<\\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' '));\nconst wordCount = plainText.split(/\\s+/).filter(word => /[A-Za-z0-9]/.test(word)).length;\nconst issues = [];\nif (status !== 200) issues.push({ level: 'Critical', text: `HTTP status ${status}` });\nif (!title) issues.push({ level: 'Critical', text: 'Missing title' }); else if (title.length > 60) issues.push({ level: 'Warning', text: `Title is ${title.length} characters` });\nif (!metaDescription) issues.push({ level: 'Warning', text: 'Missing meta description' }); else if (metaDescription.length > 160) issues.push({ level: 'Warning', text: `Meta description is ${metaDescription.length} characters` });\nif (!h1Count) issues.push({ level: 'Critical', text: 'Missing H1' }); else if (h1Count > 1) issues.push({ level: 'Warning', text: `${h1Count} H1 headings` });\nif (missingAlt) issues.push({ level: 'Warning', text: `${missingAlt} images missing alt text` });\nif (wordCount < Number(source.minimumWordCount || 300)) issues.push({ level: 'Warning', text: `Low word count (${wordCount})` });\nconst severity = issues.some(issue => issue.level === 'Critical') ? 'Critical' : issues.length ? 'Warning' : 'Pass';\nreturn { auditDate: new Date().toISOString(), url: source.url, status, title, titleLength: title.length, metaDescription, metaLength: metaDescription.length, h1Count, missingAlt, wordCount, mobileScore: '', severity, issues: issues.map(issue => issue.text).join('; '), pageSpeedApiKey: source.pageSpeedApiKey, minimumMobileScore: source.minimumMobileScore };"
+      },
+      "id": "analyze-page",
+      "name": "Analyze Page SEO",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 130]
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' + encodeURIComponent($json.url) + '&strategy=mobile&category=performance' + ($json.pageSpeedApiKey ? '&key=' + encodeURIComponent($json.pageSpeedApiKey) : '') }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "pagespeed",
+      "name": "Run Mobile PageSpeed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [470, 130]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const audit = $('Analyze Page SEO').item.json;\nconst scoreValue = $json.lighthouseResult?.categories?.performance?.score;\nconst mobileScore = typeof scoreValue === 'number' ? Math.round(scoreValue * 100) : '';\nconst extra = [];\nif (mobileScore !== '' && mobileScore < Number(audit.minimumMobileScore || 50)) extra.push(`Low mobile score (${mobileScore})`);\nif (mobileScore === '') extra.push('PageSpeed returned no score');\nconst issues = [audit.issues, ...extra].filter(Boolean).join('; ');\nconst severity = audit.severity === 'Critical' ? 'Critical' : issues ? 'Warning' : 'Pass';\nconst { pageSpeedApiKey, minimumMobileScore, ...row } = audit;\nreturn { ...row, mobileScore, severity, issues };"
+      },
+      "id": "finalize-audit",
+      "name": "Finalize Audit Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 130]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "value": "REPLACE_WITH_SPREADSHEET_ID", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "SEO Audit", "mode": "name" },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "google-sheets",
+      "name": "Save audit to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [970, 130]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $('Finalize Audit Row').all().map(item => item.json);\nconst critical = rows.filter(row => row.severity === 'Critical').length;\nconst warnings = rows.filter(row => row.severity === 'Warning').length;\nconst scores = rows.map(row => Number(row.mobileScore)).filter(score => Number.isFinite(score) && score > 0);\nconst average = scores.length ? Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length) : 'not available';\nreturn [{ json: { message: `Weekly SEO Audit\\n\\nPages checked: ${rows.length}\\nCritical: ${critical}\\nWarnings: ${warnings}\\nPassed: ${rows.length - critical - warnings}\\nAverage mobile score: ${average}\\n\\nReview the SEO Audit sheet for details.` } }];"
+      },
+      "id": "summary",
+      "name": "Build Weekly Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1210, 130]
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_CHAT_ID",
+        "text": "={{ $json.message }}",
+        "additionalFields": { "appendAttribution": false }
+      },
+      "id": "telegram",
+      "name": "Send Telegram Summary",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1450, 130]
+    }
+  ],
+  "connections": {
+    "Manual Test": { "main": [[{ "node": "Configuration", "type": "main", "index": 0 }]] },
+    "Weekly Schedule": { "main": [[{ "node": "Configuration", "type": "main", "index": 0 }]] },
+    "Configuration": { "main": [[{ "node": "Download Sitemap", "type": "main", "index": 0 }]] },
+    "Download Sitemap": { "main": [[{ "node": "Extract Sitemap URLs", "type": "main", "index": 0 }]] },
+    "Extract Sitemap URLs": { "main": [[{ "node": "Download Page", "type": "main", "index": 0 }]] },
+    "Download Page": { "main": [[{ "node": "Analyze Page SEO", "type": "main", "index": 0 }]] },
+    "Analyze Page SEO": { "main": [[{ "node": "Run Mobile PageSpeed", "type": "main", "index": 0 }]] },
+    "Run Mobile PageSpeed": { "main": [[{ "node": "Finalize Audit Row", "type": "main", "index": 0 }]] },
+    "Finalize Audit Row": { "main": [[{ "node": "Save audit to Google Sheets", "type": "main", "index": 0 }]] },
+    "Save audit to Google Sheets": { "main": [[{ "node": "Build Weekly Summary", "type": "main", "index": 0 }]] },
+    "Build Weekly Summary": { "main": [[{ "node": "Send Telegram Summary", "type": "main", "index": 0 }]] }
+  },
+  "pinData": {},
+  "settings": { "executionOrder": "v1", "saveManualExecutions": true },
+  "active": false,
+  "versionId": "aae4cc6b-7ec0-4e75-ae47-cb8c57f9e839",
+  "meta": { "templateCredsSetupCompleted": false },
+  "tags": []
+}

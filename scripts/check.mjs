@@ -8,6 +8,7 @@ const data = await readFile(path.join(root, "js", "data.js"), "utf8");
 const app = await readFile(path.join(root, "js", "app.js"), "utf8");
 const css = await readFile(path.join(root, "css", "styles.css"), "utf8");
 const failures = [];
+const combined = html + data + app + css;
 
 for (const [name, content] of [["index.html", html], ["data.js", data], ["app.js", app], ["styles.css", css]]) {
   if (/[Ââð]/.test(content)) failures.push(`${name} contains likely mojibake characters.`);
@@ -15,6 +16,13 @@ for (const [name, content] of [["index.html", html], ["data.js", data], ["app.js
 if (/href=["']#["']/.test(html)) failures.push("index.html contains a placeholder # link.");
 if (/Keshav Uppal/i.test(html + data + app)) failures.push("Prohibited name appears in public source.");
 if (/(4\+ years|100% client|fake analytics)/i.test(html + data)) failures.push("Unsupported marketing claim found.");
+if (/github\.com\/darkhorsepig/i.test(combined)) failures.push("An old GitHub username remains in the public portfolio.");
+for (const section of ["projects", "automation", "wordpress", "experience", "contact"]) {
+  if (!html.includes(`id="${section}"`)) failures.push(`Missing required section: ${section}`);
+}
+for (const filter of ["Featured", "WordPress", "n8n Automation", "Web Development", "Full-Stack Systems", "UI/UX"]) {
+  if (!app.includes(`"${filter}"`)) failures.push(`Missing required project filter: ${filter}`);
+}
 
 const assetReferences = new Set();
 for (const content of [html, data, css]) {

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>n8n Social Media Publishing Demo</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;background:#f7f7fb;color:#25242a;font-family:Inter,Segoe UI,Arial,sans-serif;overflow:hidden}
+  .top{height:72px;background:white;border-bottom:1px solid #e2e2e8;display:flex;align-items:center;padding:0 28px;gap:18px;box-shadow:0 1px 4px #1d1b2910}
+  .logo{width:34px;height:34px;border-radius:10px;background:#ff6d5a;color:white;display:grid;place-items:center;font-weight:800;font-size:18px}.title{font-weight:700;font-size:17px}.tag{font-size:12px;color:#6b6875;background:#f1f0f5;border-radius:20px;padding:6px 10px}.spacer{flex:1}.inactive{font-size:12px;color:#777;background:#eeeef2;padding:6px 12px;border-radius:6px}.test{background:#ff6d5a;color:white;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700}
+  .canvas{position:relative;width:1600px;height:828px;background-color:#fafafe;background-image:radial-gradient(#d8d7df 1.25px,transparent 1.25px);background-size:22px 22px}
+  svg{position:absolute;inset:0;width:100%;height:100%}.wire{fill:none;stroke:#aaa8b4;stroke-width:2.5}.wire.ok{stroke:#7d5ce7}.wire.fail{stroke:#d7a25a}
+  .node{position:absolute;width:174px;min-height:72px;background:#fff;border:1px solid #d9d8e0;border-radius:9px;box-shadow:0 3px 10px #24202f14;padding:13px 12px 10px 48px}.node:before{content:attr(data-icon);position:absolute;left:12px;top:17px;width:27px;height:27px;border-radius:7px;display:grid;place-items:center;background:#f1edff;color:#7559d9;font-weight:800}.node b{display:block;font-size:12.5px;line-height:1.25}.node small{display:block;color:#85818d;font-size:10.5px;margin-top:5px}.node .port{position:absolute;width:9px;height:9px;border-radius:50%;background:white;border:2px solid #8c8895;top:31px}.in{left:-5px}.out{right:-5px}.success{border-color:#ad9ae8}.publish:before{background:#e9f7ef;color:#24915b}.report:before{background:#fff0e9;color:#e75f42}.failnode:before{background:#fff1dd;color:#bd791c}
+  .label{position:absolute;font-size:10px;color:#77737f;background:#fafafe;padding:2px 5px;border-radius:4px}.badge{position:absolute;right:8px;top:8px;width:9px;height:9px;border-radius:50%;background:#48b77b}
+  .legend{position:absolute;left:28px;bottom:24px;background:white;border:1px solid #dddce4;border-radius:9px;padding:12px 16px;font-size:11px;color:#686572;box-shadow:0 2px 8px #24202f12}.legend strong{color:#33313a}.zoom{position:absolute;right:24px;bottom:24px;background:#fff;border:1px solid #dddce4;border-radius:8px;padding:9px 14px;color:#777;font-size:13px}
+</style>
+</head>
+<body>
+<header class="top"><div class="logo">n8n</div><div class="title">Multi-Platform Social Media Publisher</div><div class="tag">API-Free Client Demo</div><div class="spacer"></div><div class="inactive">Inactive</div><div class="test">Test workflow</div></header>
+<main class="canvas">
+<svg viewBox="0 0 1600 828" preserveAspectRatio="none">
+  <path class="wire ok" d="M202 390 C225 390 225 390 248 390"/><path class="wire ok" d="M422 390 C447 390 447 390 472 390"/><path class="wire ok" d="M646 390 C670 390 670 390 694 390"/><path class="wire ok" d="M868 390 C892 390 892 390 916 390"/>
+  <path class="wire fail" d="M781 425 C781 520 830 565 916 565"/>
+  <path class="wire ok" d="M1090 390 C1120 390 1095 142 1144 142"/><path class="wire ok" d="M1090 390 C1120 390 1095 302 1144 302"/><path class="wire ok" d="M1090 390 C1120 390 1095 462 1144 462"/><path class="wire ok" d="M1090 390 C1120 390 1095 622 1144 622"/>
+  <path class="wire" d="M1318 142 C1365 142 1340 382 1382 382"/><path class="wire" d="M1318 302 C1350 302 1350 382 1382 382"/><path class="wire" d="M1318 462 C1350 462 1350 382 1382 382"/><path class="wire" d="M1318 622 C1365 622 1340 382 1382 382"/>
+</svg>
+<div class="node success" data-icon="▶" style="left:28px;top:354px"><span class="port out"></span><span class="badge"></span><b>Start Demo</b><small>Manual Trigger</small></div>
+<div class="node success" data-icon="{ }" style="left:248px;top:354px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>Demo Content Input</b><small>Approved sample post</small></div>
+<div class="node success" data-icon="✓" style="left:472px;top:354px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>Validate Content</b><small>Caption, media, approval</small></div>
+<div class="node success" data-icon="?" style="left:694px;top:354px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>Content Valid?</b><small>Validation gate</small></div>
+<div class="label" style="left:870px;top:365px">true</div><div class="label" style="left:790px;top:500px">false</div>
+<div class="node success" data-icon="☷" style="left:916px;top:354px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>Create Platform Jobs</b><small>One item per platform</small></div>
+<div class="node failnode" data-icon="!" style="left:916px;top:529px"><span class="port in"></span><b>Validation Failed</b><small>Block and report errors</small></div>
+<div class="node success" data-icon="⇄" style="left:916px;top:184px"><span class="port out"></span><span class="badge"></span><b>Route by Platform</b><small>Four publishing branches</small></div>
+<div class="node publish" data-icon="IG" style="left:1144px;top:106px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>Instagram Publish</b><small>Simulated API response</small></div>
+<div class="node publish" data-icon="f" style="left:1144px;top:266px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>Facebook Publish</b><small>Simulated API response</small></div>
+<div class="node publish" data-icon="in" style="left:1144px;top:426px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>LinkedIn Publish</b><small>Simulated API response</small></div>
+<div class="node publish" data-icon="♪" style="left:1144px;top:586px"><span class="port in"></span><span class="port out"></span><span class="badge"></span><b>TikTok Publish</b><small>Simulated API response</small></div>
+<div class="node report" data-icon="▤" style="left:1382px;top:346px;width:184px"><span class="port in"></span><span class="badge"></span><b>Client Demo Report</b><small>Results and post IDs</small></div>
+<div class="legend"><strong>Portfolio prototype</strong> · API publishing is simulated · No credentials required</div><div class="zoom">− &nbsp; 80% &nbsp; +</div>
+</main>
+</body>
+</html>
