@@ -10,5 +10,18 @@
   },
   "engines": {
     "node": ">=20"
-  }
+  },
+  "description": "A premium, conversion-focused portfolio for **Jeruz Laynell J. Garde** (`Presidentkoko`). The site presents full-stack development, business systems, verified n8n automations, custom WordPress work, LinkedIn and social-media management, graphic design, and content production through source-backed project data and real portfolio assets.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darkhorsepig/web-port.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darkhorsepig/web-port/issues"
+  },
+  "homepage": "https://github.com/darkhorsepig/web-port#readme"
 }

@@ -9,6 +9,7 @@ The front end remains intentionally lightweight: semantic HTML, custom CSS, and 
 - Cinematic, responsive hero with a lightweight particle field and rotating professional roles
 - Sticky navigation, animated mobile menu, custom desktop cursor, magnetic buttons, and reduced-motion support
 - Customer-focused value and service sections
+- Dedicated “Meet the Developer” video section with a responsive poster-first player, custom keyboard-accessible controls, replay, fullscreen, and review-labelled English draft captions/transcript
 - Filterable project case studies for Featured, WordPress, n8n Automation, Web Development, Full-Stack Systems, and UI/UX work
 - Dedicated AI & Automation section with a lightweight lead-flow diagram and implementation-level n8n case studies
 - Dedicated WordPress section with verified custom-theme projects and a transparent Santech evidence request
@@ -31,7 +32,7 @@ The front end remains intentionally lightweight: semantic HTML, custom CSS, and 
 │   │   ├── automation/      # Verified n8n workflow proof
 │   │   ├── creative/        # Optimised creative gallery assets
 │   │   └── wordpress/       # WordPress theme screenshots
-│   └── videos/              # Existing demo and aerial media
+│   └── videos/              # Intro, demo, aerial media, and caption tracks
 ├── css/styles.css           # Complete visual system and responsive layout
 ├── js/
 │   ├── data.js              # Editable site, service, project, gallery, skill, and experience data
@@ -66,6 +67,8 @@ Most updates are made in [`js/data.js`](js/data.js):
 - `experience` — verified work and education timeline
 
 To add a creative item, place an optimised image in `assets/images/creative/` and add one object to `creativeWork`. To add a project, copy a verified image into `assets/images/`, then add one project object. Leave `live` or `github` empty when no public URL exists; the interface automatically hides the missing action.
+
+The developer introduction uses `assets/videos/intro-video.mp4` (1280×720 H.264/AAC, CRF 26, fast-start), `assets/images/intro-video-poster.webp`, and `assets/videos/intro-video-captions.vtt`. The captions and visible transcript are machine-generated drafts; the uncertain AI tool name around 00:35 is explicitly marked for review.
 
 ## Run locally
 

@@ -686,6 +686,157 @@
     }
   }
 
+  function initIntroVideo() {
+    const player = $("[data-intro-player]");
+    if (!player) return;
+
+    const video = $("#intro-video", player);
+    const playButton = $("[data-video-play]", player);
+    const playIcon = $("[data-video-play-icon]", player);
+    const overlayButton = $("[data-video-play-overlay]", player);
+    const muteButton = $("[data-video-mute]", player);
+    const volumeIcon = $("[data-video-volume-icon]", player);
+    const volumeControl = $("[data-video-volume]", player);
+    const progressControl = $("[data-video-progress]", player);
+    const currentTime = $("[data-video-current]", player);
+    const duration = $("[data-video-duration]", player);
+    const captionsButton = $("[data-video-captions]", player);
+    const fullscreenButton = $("[data-video-fullscreen]", player);
+    const replayPanel = $("[data-video-replay-panel]", player);
+    const replayButton = $("[data-video-replay]", player);
+    const screen = $(".intro-screen", player);
+    const captionTrack = video.textTracks?.[0];
+
+    const formatTime = (seconds) => {
+      const safeSeconds = Number.isFinite(seconds) ? Math.max(0, seconds) : 0;
+      const minutes = Math.floor(safeSeconds / 60);
+      return `${minutes}:${String(Math.floor(safeSeconds % 60)).padStart(2, "0")}`;
+    };
+
+    const updatePlayState = () => {
+      const isPlaying = !video.paused && !video.ended;
+      playIcon.textContent = isPlaying ? "❚❚" : "▶";
+      playButton.setAttribute("aria-label", isPlaying ? "Pause video" : "Play video");
+      if (isPlaying) player.classList.add("has-started");
+    };
+
+    const updateVolumeState = () => {
+      const silent = video.muted || video.volume === 0;
+      volumeIcon.textContent = silent ? "🔇" : video.volume < .5 ? "🔉" : "🔊";
+      muteButton.setAttribute("aria-label", silent ? "Unmute video" : "Mute video");
+      if (!video.muted) volumeControl.value = String(video.volume);
+    };
+
+    const updateProgress = () => {
+      currentTime.textContent = formatTime(video.currentTime);
+      if (Number.isFinite(video.duration) && video.duration > 0) {
+        progressControl.value = String(Math.round((video.currentTime / video.duration) * 1000));
+        progressControl.setAttribute("aria-valuetext", `${formatTime(video.currentTime)} of ${formatTime(video.duration)}`);
+      }
+    };
+
+    const syncDuration = () => {
+      duration.textContent = formatTime(video.duration);
+      progressControl.disabled = !Number.isFinite(video.duration);
+      updateProgress();
+    };
+
+    const togglePlayback = () => {
+      replayPanel.hidden = true;
+      if (video.ended) video.currentTime = 0;
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    };
+
+    const toggleCaptions = () => {
+      if (!captionTrack) return;
+      const show = captionTrack.mode !== "showing";
+      captionTrack.mode = show ? "showing" : "hidden";
+      captionsButton.setAttribute("aria-pressed", String(show));
+      captionsButton.setAttribute("aria-label", show ? "Turn captions off" : "Turn captions on");
+    };
+
+    const toggleFullscreen = async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else if (screen.requestFullscreen) await screen.requestFullscreen();
+        else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+      } catch {
+        fullscreenButton.setAttribute("title", "Fullscreen is unavailable in this browser");
+      }
+    };
+
+    video.removeAttribute("controls");
+    progressControl.disabled = true;
+    if (captionTrack) captionTrack.mode = "showing";
+    else captionsButton.hidden = true;
+
+    playButton.addEventListener("click", togglePlayback);
+    overlayButton.addEventListener("click", togglePlayback);
+    video.addEventListener("click", togglePlayback);
+    muteButton.addEventListener("click", () => { video.muted = !video.muted; });
+    volumeControl.addEventListener("input", () => {
+      video.volume = Number(volumeControl.value);
+      video.muted = video.volume === 0;
+    });
+    progressControl.addEventListener("input", () => {
+      if (Number.isFinite(video.duration)) video.currentTime = (Number(progressControl.value) / 1000) * video.duration;
+    });
+    captionsButton.addEventListener("click", toggleCaptions);
+    fullscreenButton.addEventListener("click", toggleFullscreen);
+    replayButton.addEventListener("click", () => {
+      replayPanel.hidden = true;
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+
+    video.addEventListener("loadedmetadata", syncDuration);
+    video.addEventListener("durationchange", syncDuration);
+    video.addEventListener("timeupdate", updateProgress);
+    video.addEventListener("play", updatePlayState);
+    video.addEventListener("pause", updatePlayState);
+    video.addEventListener("volumechange", updateVolumeState);
+    video.addEventListener("ended", () => {
+      updatePlayState();
+      replayPanel.hidden = false;
+      replayButton.focus({ preventScroll: true });
+    });
+
+    document.addEventListener("fullscreenchange", () => {
+      const isFullscreen = Boolean(document.fullscreenElement);
+      fullscreenButton.setAttribute("aria-label", isFullscreen ? "Exit fullscreen" : "Enter fullscreen");
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && !video.paused) video.pause();
+    });
+
+    player.addEventListener("keydown", (event) => {
+      const tag = event.target.tagName;
+      if (tag === "INPUT" || tag === "SUMMARY" || (tag === "BUTTON" && (event.key === " " || event.key === "Enter"))) return;
+      const key = event.key.toLowerCase();
+      if (key === " " || key === "k") {
+        event.preventDefault();
+        togglePlayback();
+      } else if (key === "m") {
+        event.preventDefault();
+        video.muted = !video.muted;
+      } else if (key === "c") {
+        event.preventDefault();
+        toggleCaptions();
+      } else if (key === "f") {
+        event.preventDefault();
+        toggleFullscreen();
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        const direction = event.key === "ArrowLeft" ? -1 : 1;
+        video.currentTime = Math.max(0, Math.min(video.duration || 0, video.currentTime + direction * 5));
+      }
+    });
+
+    updatePlayState();
+    updateVolumeState();
+  }
+
   function initProjectPrefill() {
     $$('[data-project-type]').forEach((link) => link.addEventListener("click", () => prefillProject(link.dataset.projectType)));
   }
@@ -795,6 +946,7 @@
     renderSkills();
     renderExperience();
     initNavigation();
+    initIntroVideo();
     initRoleRotation();
     initCursor();
     initHeroCanvas();

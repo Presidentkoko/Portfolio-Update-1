@@ -73,6 +73,7 @@
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#home">Home</a>
         <a href="#about">About</a>
+        <a href="#meet">Meet</a>
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
         <a href="#automation">AI & Automation</a>
@@ -92,16 +93,17 @@
     </div>
 
     <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
-      <div class="mobile-menu-number">01—09</div>
+      <div class="mobile-menu-number">01—10</div>
       <a href="#home">Home <span>01</span></a>
       <a href="#about">About <span>02</span></a>
-      <a href="#services">Services <span>03</span></a>
-      <a href="#projects">Projects <span>04</span></a>
-      <a href="#automation">AI & Automation <span>05</span></a>
-      <a href="#wordpress">WordPress <span>06</span></a>
-      <a href="#creative">Creative Work <span>07</span></a>
-      <a href="#experience">Experience <span>08</span></a>
-      <a href="#contact">Contact <span>09</span></a>
+      <a href="#meet">Meet the Developer <span>03</span></a>
+      <a href="#services">Services <span>04</span></a>
+      <a href="#projects">Projects <span>05</span></a>
+      <a href="#automation">AI & Automation <span>06</span></a>
+      <a href="#wordpress">WordPress <span>07</span></a>
+      <a href="#creative">Creative Work <span>08</span></a>
+      <a href="#experience">Experience <span>09</span></a>
+      <a href="#contact">Contact <span>10</span></a>
       <div class="mobile-menu-actions">
         <a class="button button-primary" href="#contact">Let's Work Together</a>
         <a class="button button-quiet" href="assets/docs/Jeruz-Garde-Resume.pdf" target="_blank" rel="noreferrer">Download CV</a>
@@ -194,11 +196,99 @@
       </div>
     </section>
 
+    <section class="meet section" id="meet" aria-labelledby="meet-title">
+      <div class="meet-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-heading split-heading reveal">
+          <div>
+            <span class="section-index">03 / MEET</span>
+            <p class="section-kicker">A quick personal introduction</p>
+            <h2 id="meet-title">Meet the developer behind the systems.</h2>
+          </div>
+          <p>In under two minutes, hear how I combine engineering, design, digital support, and modern AI tools to help teams move from an idea to a dependable result.</p>
+        </div>
+
+        <div class="meet-layout">
+          <div class="intro-player reveal" data-intro-player tabindex="0" aria-label="Developer introduction video player">
+            <div class="intro-screen">
+              <video id="intro-video" controls playsinline preload="metadata" poster="assets/images/intro-video-poster.webp" aria-describedby="intro-video-description">
+                <source src="assets/videos/intro-video.mp4" type="video/mp4">
+                <track kind="captions" src="assets/videos/intro-video-captions.vtt" srclang="en" label="English (machine-generated draft)" default>
+                Your browser does not support embedded video. <a href="assets/videos/intro-video.mp4">Download the introduction video</a>.
+              </video>
+
+              <button class="intro-overlay-play" type="button" data-video-play-overlay aria-label="Play introduction video">
+                <span aria-hidden="true">▶</span>
+                <strong>Play introduction</strong>
+                <small>1 min 41 sec</small>
+              </button>
+
+              <div class="intro-replay" data-video-replay-panel hidden>
+                <p>Thanks for watching.</p>
+                <button type="button" data-video-replay><span aria-hidden="true">↻</span> Replay introduction</button>
+              </div>
+
+              <div class="intro-controls" data-video-controls>
+                <button class="intro-control intro-control-main" type="button" data-video-play aria-label="Play video" title="Play or pause (Space or K)">
+                  <span data-video-play-icon aria-hidden="true">▶</span>
+                </button>
+                <span class="intro-time" aria-label="Video time"><b data-video-current>0:00</b><i>/</i><span data-video-duration>1:41</span></span>
+                <label class="intro-progress-label">
+                  <span class="sr-only">Video progress</span>
+                  <input class="intro-progress" data-video-progress type="range" min="0" max="1000" value="0" step="1" aria-label="Video progress">
+                </label>
+                <button class="intro-control" type="button" data-video-mute aria-label="Mute video" title="Mute or unmute (M)">
+                  <span data-video-volume-icon aria-hidden="true">🔊</span>
+                </button>
+                <label class="intro-volume-label">
+                  <span class="sr-only">Volume</span>
+                  <input class="intro-volume" data-video-volume type="range" min="0" max="1" value="1" step="0.05" aria-label="Volume">
+                </label>
+                <button class="intro-control intro-cc" type="button" data-video-captions aria-label="Turn captions off" aria-pressed="true" title="Toggle captions (C)">CC</button>
+                <button class="intro-control" type="button" data-video-fullscreen aria-label="Enter fullscreen" title="Fullscreen (F)">
+                  <span aria-hidden="true">⛶</span>
+                </button>
+              </div>
+            </div>
+            <p class="intro-shortcuts">Keyboard: <kbd>Space</kbd> play/pause · <kbd>M</kbd> mute · <kbd>←</kbd><kbd>→</kbd> seek · <kbd>C</kbd> captions · <kbd>F</kbd> fullscreen</p>
+          </div>
+
+          <div class="meet-copy reveal" id="intro-video-description">
+            <p class="meet-eyebrow">Jeruz Garde · Computer Engineer</p>
+            <h3>Technical range, practical communication, and a willingness to learn.</h3>
+            <p>I build responsive websites, WordPress experiences, full-stack systems, and n8n automations. I also bring experience in digital support, research, content tools, and teaching—useful when a solution must be understood as well as built.</p>
+            <ul class="meet-points" aria-label="What Jeruz brings to a project">
+              <li><span>01</span> Development grounded in real operational needs</li>
+              <li><span>02</span> Organized, detail-aware independent delivery</li>
+              <li><span>03</span> Clear communication and proactive problem solving</li>
+            </ul>
+            <div class="meet-actions">
+              <a class="button button-primary magnetic" href="#contact">Start a Conversation</a>
+              <a class="button button-outline" href="assets/docs/Jeruz-Garde-Resume.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
+            </div>
+
+            <details class="intro-transcript">
+              <summary>Read the draft transcript</summary>
+              <div>
+                <p class="transcript-note"><strong>Review note:</strong> This transcript and the embedded captions were machine-generated from the supplied video. One AI tool name at 00:35 remains unclear and is marked below.</p>
+                <p>Hi. My name is Jeruz Laynell Garde, and I'm from the Philippines. Thank you for taking the time to consider my application.</p>
+                <p>My background is mainly in web development, web design, digital support, and working with modern AI tools. I'm comfortable with technologies such as WordPress and Elementor. Also, HTML, CSS, JavaScript, React, Next.js, APIs, databases, and responsive development.</p>
+                <p>I also regularly use tools like ChatGPT, Claude, and <em>[unclear AI tool name]</em> to improve my workflow, research solutions, troubleshoot problems, and automate repetitive tasks.</p>
+                <p>Aside from development, I'm also comfortable with Google Workspace, Canva, online research, file management, spreadsheets, and other administrative or technical tasks.</p>
+                <p>One of my strengths is that I'm very adaptive. If there's a tool or process I haven't used before, I'm willing to learn it and figure out how it works. I'm also detail-oriented, organized, and comfortable following instructions while still being proactive when I see something that can be improved.</p>
+                <p>I work well independently, but I also value clear communication and feedback when working with a team. I'm looking for an opportunity where I can contribute my current skills, continue learning, and build a reliable, long-term working relationship. Thank you again, and I look forward to speaking with you.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="services section" id="services" aria-labelledby="services-title">
       <div class="container">
         <div class="section-heading split-heading reveal">
           <div>
-            <span class="section-index">03 / SERVICES</span>
+            <span class="section-index">04 / SERVICES</span>
             <p class="section-kicker">Built around real client problems</p>
             <h2 id="services-title">One studio for the system and the story around it.</h2>
           </div>
@@ -212,7 +302,7 @@
       <div class="container">
         <div class="section-heading split-heading reveal">
           <div>
-            <span class="section-index">04 / PROJECTS</span>
+            <span class="section-index">05 / PROJECTS</span>
             <p class="section-kicker">Selected systems, sites, and brand work</p>
             <h2 id="projects-title">Work designed to be used — not only admired.</h2>
           </div>
@@ -238,7 +328,7 @@
       <div class="container">
         <div class="section-heading split-heading reveal">
           <div>
-            <span class="section-index">05 / AI & AUTOMATION</span>
+            <span class="section-index">06 / AI & AUTOMATION</span>
             <p class="section-kicker">Verified n8n workflow case studies</p>
             <h2 id="automation-title">Turn repeatable decisions into dependable workflows.</h2>
           </div>
@@ -262,7 +352,7 @@
       <div class="container">
         <div class="section-heading split-heading reveal">
           <div>
-            <span class="section-index">06 / WORDPRESS DEVELOPMENT</span>
+            <span class="section-index">07 / WORDPRESS DEVELOPMENT</span>
             <p class="section-kicker">Custom themes and content-managed business websites</p>
             <h2 id="wordpress-title">WordPress built for editors, visitors, and long-term ownership.</h2>
           </div>
@@ -275,7 +365,7 @@
     <section class="growth section" id="growth" aria-labelledby="growth-title">
       <div class="container growth-shell">
         <div class="growth-copy reveal">
-          <span class="section-index">07 / GROWTH MANAGEMENT</span>
+          <span class="section-index">08 / GROWTH MANAGEMENT</span>
           <p class="section-kicker">A system for consistent visibility</p>
           <h2 id="growth-title">Turn company-page activity into an organised growth workflow.</h2>
           <p>LinkedIn and social management are presented here through the work itself: positioning, content planning, visual systems, publishing routines, recruitment campaigns, and community engagement. Unverified analytics are never used as proof.</p>
@@ -370,7 +460,7 @@
       <div class="container">
         <div class="section-heading split-heading reveal">
           <div>
-            <span class="section-index">08 / CREATIVE WORK</span>
+            <span class="section-index">09 / CREATIVE WORK</span>
             <p class="section-kicker">Campaigns, content, and visual systems</p>
             <h2 id="creative-title">Design that gives the message a stronger signal.</h2>
           </div>
@@ -385,7 +475,7 @@
       <div class="container">
         <div class="section-heading split-heading reveal">
           <div>
-            <span class="section-index">09 / PROCESS</span>
+            <span class="section-index">10 / PROCESS</span>
             <p class="section-kicker">Clear from first call to what comes next</p>
             <h2 id="process-title">A professional process without unnecessary complexity.</h2>
           </div>
@@ -398,7 +488,7 @@
     <section class="skills section" id="skills" aria-labelledby="skills-title">
       <div class="container skills-layout">
         <div class="section-heading reveal">
-          <span class="section-index">10 / CAPABILITIES</span>
+          <span class="section-index">11 / CAPABILITIES</span>
           <p class="section-kicker">Tools selected for the work</p>
           <h2 id="skills-title">A practical stack across product, operations, and content.</h2>
           <p>Technologies are grouped by where they create value — without arbitrary percentage scores.</p>
@@ -411,7 +501,7 @@
       <div class="container">
         <div class="section-heading split-heading reveal">
           <div>
-            <span class="section-index">11 / EXPERIENCE</span>
+            <span class="section-index">12 / EXPERIENCE</span>
             <p class="section-kicker">Engineering, teaching, building, and growth</p>
             <h2 id="experience-title">A multidisciplinary path with one consistent thread: making things work.</h2>
           </div>
@@ -424,7 +514,7 @@
     <section class="contact section" id="contact" aria-labelledby="contact-title">
       <div class="container contact-shell">
         <div class="contact-copy reveal">
-          <span class="section-index">12 / START A PROJECT</span>
+          <span class="section-index">13 / START A PROJECT</span>
           <p class="section-kicker">Have a project, campaign, or idea?</p>
           <h2 id="contact-title">Let's turn it into something that works.</h2>
           <p>Share what you are trying to improve, launch, or simplify. I will reply with the most useful next step — even if that means narrowing the scope first.</p>
