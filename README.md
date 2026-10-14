@@ -1,12 +1,15 @@
-# Jeruz Garde — Digital Studio Portfolio
+# Jeruz Garde — Portfolio
 
-A premium, conversion-focused portfolio for **Jeruz Laynell J. Garde** (`Presidentkoko`). The site presents full-stack development, business systems, verified n8n automations, custom WordPress work, LinkedIn and social-media management, graphic design, and content production through source-backed project data and real portfolio assets.
+A product-focused portfolio for **Jeruz Laynell J. Garde** (`Presidentkoko`). The site leads with six production systems shipped in 2026 (Content OS for Ceshker Group, the Fleet Intelligence Dashboard, FrameForge, the Content OS video studio, the Outreach Hiring Dashboard, and One Login), then covers verified n8n automations, WordPress work, growth management, social media / YouTube / GoHighLevel operations, graphic design, and content production.
 
 The front end remains intentionally lightweight: semantic HTML, custom CSS, and vanilla JavaScript. A small Vercel function handles project inquiries through Resend.
 
 ## What is included
 
-- Cinematic, responsive hero with a lightweight particle field and rotating professional roles
+- Mobile-first responsive layout with a single dark design system (`css/styles.css`), Inter + Manrope + JetBrains Mono
+- Hero with rotating roles, at-a-glance stats, and a production tech strip
+- **Production Systems** grid: six products with screenshots, case-study modals, live links, repositories, and a Loom walkthrough
+- **Operations** section: managed Instagram and Facebook accounts (public snapshots), YouTube channel and video samples, GoHighLevel areas, example lead workflow, and build method
 - Sticky navigation, animated mobile menu, custom desktop cursor, magnetic buttons, and reduced-motion support
 - Customer-focused value and service sections
 - Dedicated “Meet the Developer” video section with a responsive poster-first player, custom keyboard-accessible controls, replay, fullscreen, and review-labelled English draft captions/transcript
@@ -30,6 +33,9 @@ The front end remains intentionally lightweight: semantic HTML, custom CSS, and 
 │   ├── docs/                # CV and PDF portfolio
 │   ├── images/              # Project visuals
 │   │   ├── automation/      # Verified n8n workflow proof
+│   │   ├── products/        # Production app screenshots
+│   │   ├── social/accounts/ # Managed account snapshots
+│   │   ├── social/youtube/  # Channel snapshot and video thumbnails
 │   │   ├── creative/        # Optimised creative gallery assets
 │   │   └── wordpress/       # WordPress theme screenshots
 │   └── videos/              # Intro, demo, aerial media, and caption tracks
@@ -58,7 +64,9 @@ Most updates are made in [`js/data.js`](js/data.js):
 - `roles` — hero role rotation
 - `values` — credibility/value cards
 - `services` — client problem, deliverables, benefit, and CTA for each service
-- `projects` — full case-study records, images, technology, and verified links
+- `projects` — full case-study records, images, technology, and verified links; `spotlight: true` places a project in the Production Systems grid
+- `stats`, `techStrip` — hero stats and the production tool strip
+- `socialAccounts`, `youtube`, `ghl`, `walkthrough` — content for the Operations section
 - `wordpressVerification` — evidence still required before the Santech case study can be attributed and published
 - `creativeWork` — gallery images, categories, titles, and formats
 - `growthServices` — LinkedIn/social management deliverables
@@ -97,7 +105,7 @@ If `SITE_URL` is not set, the current working GitHub Pages URL is used as the ca
 
 ## Deploy to Vercel
 
-1. Import the `Presidentkoko/web-port` repository in Vercel.
+1. Import the `Presidentkoko/Portfolio-Update-1` repository in Vercel (project `portfolio-update-1`).
 2. Vercel reads `vercel.json` and runs `npm run build`.
 3. Add these environment variables for **Production**, **Preview**, and **Development** as appropriate:
 

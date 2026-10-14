@@ -17,10 +17,10 @@ if (/href=["']#["']/.test(html)) failures.push("index.html contains a placeholde
 if (/Keshav Uppal/i.test(html + data + app)) failures.push("Prohibited name appears in public source.");
 if (/(4\+ years|100% client|fake analytics)/i.test(html + data)) failures.push("Unsupported marketing claim found.");
 if (/github\.com\/darkhorsepig/i.test(combined)) failures.push("An old GitHub username remains in the public portfolio.");
-for (const section of ["meet", "projects", "automation", "wordpress", "experience", "contact"]) {
+for (const section of ["products", "meet", "projects", "automation", "wordpress", "operations", "experience", "contact"]) {
   if (!html.includes(`id="${section}"`)) failures.push(`Missing required section: ${section}`);
 }
-for (const filter of ["Featured", "WordPress", "n8n Automation", "Web Development", "Full-Stack Systems", "UI/UX"]) {
+for (const filter of ["Featured", "Production Apps", "WordPress", "n8n Automation", "Web Development", "Full-Stack Systems", "UI/UX"]) {
   if (!app.includes(`"${filter}"`)) failures.push(`Missing required project filter: ${filter}`);
 }
 

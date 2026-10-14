@@ -5,7 +5,7 @@
     site: {
       name: "Jeruz Garde",
       fullName: "Jeruz Laynell J. Garde",
-      title: "Computer Engineer, Web Developer & Automation Builder",
+      title: "Computer Engineer, Full-Stack Developer & AI Automation Specialist",
       email: "jeruzgarde@gmail.com",
       phoneDisplay: "+63 961 417 0201",
       phone: "+639614170201",
@@ -20,14 +20,24 @@
 
     roles: [
       "Full-Stack Developer",
-      "WordPress Developer",
-      "n8n Automation Builder",
-      "Growth Manager",
+      "Next.js & Supabase Developer",
+      "AI Automation Specialist",
+      "n8n Workflow Builder",
+      "GoHighLevel CRM Builder",
       "Social Media Manager",
-      "Graphic Designer",
-      "Automation Specialist",
-      "Creative Technologist"
+      "YouTube Video Editor",
+      "WordPress Developer",
+      "Graphic Designer"
     ],
+
+    stats: [
+      { value: "6", label: "Production apps shipped in 2026" },
+      { value: "4", label: "Verified n8n workflow case studies" },
+      { value: "7+", label: "Client social and YouTube accounts supported" },
+      { value: "PH", label: "Based in Southern Leyte, working worldwide" }
+    ],
+
+    techStrip: ["Next.js", "TypeScript", "React", "Node.js", "Supabase", "PostgreSQL", "Tailwind CSS", "Vercel", "Railway", "n8n", "GoHighLevel", "WordPress", "Canva API", "FFmpeg", "Whisper", "Telegram Bots", "Google Sheets API", "Claude Code"],
 
     values: [
       { icon: "target", title: "Business-first thinking", text: "Every feature, page, and campaign starts with the result it needs to create." },
@@ -72,6 +82,22 @@
         cta: "Automate a workflow"
       },
       {
+        icon: "funnel",
+        title: "GoHighLevel CRM & Funnels",
+        problem: "Leads arrive from ads and social posts but nobody can see where they go, who owns them, or whether follow-up happened.",
+        provide: "Funnels, forms, calendars, pipelines, tags, email/SMS nurture, workflow triggers, webhooks, and n8n/Make/Zapier integrations in GoHighLevel.",
+        benefit: "One connected journey from the first click to booking, pipeline movement, and reporting, with duplicate prevention and stop conditions built in.",
+        cta: "Plan a CRM workflow"
+      },
+      {
+        icon: "youtube",
+        title: "YouTube & Content Operations",
+        problem: "Long-form videos, scripts, voiceovers, and thumbnails pile up without a reliable editing, review, and publishing routine.",
+        provide: "Script and asset organisation, long-form and short-form editing, QC on audio, captions and pacing, titles, descriptions, thumbnails, and repurposing into Shorts and Reels.",
+        benefit: "A steady publishing cadence with approval and quality gates before anything goes live.",
+        cta: "Plan a content pipeline"
+      },
+      {
         icon: "linkedin",
         title: "LinkedIn Growth Management",
         problem: "Your company page is active but lacks positioning, consistency, and a lead-focused content system.",
@@ -114,6 +140,210 @@
     ],
 
     projects: [
+      {
+        slug: "ceshker-content-os",
+        title: "Content OS for Ceshker Group & NFAMation",
+        kicker: "Social content operations platform",
+        category: "Production Apps",
+        filters: ["Featured", "Production Apps", "Full-Stack Systems", "UI/UX"],
+        featured: true,
+        spotlight: true,
+        spotlightSize: "large",
+        year: "2026",
+        client: "Ceshker Group · Texas",
+        image: "assets/images/products/ceshker-command-center.jpg",
+        gallery: ["assets/images/products/ceshker-calendar.jpg", "assets/images/products/ceshker-performance.jpg"],
+        alt: "Content OS command center dashboard showing content overview, live feed, channels, and pipeline health",
+        summary: "A production dashboard that takes a real-estate law and title firm's content from a planning spreadsheet to published posts on Facebook, Instagram, and YouTube, with approvals, Canva-generated graphics, brand checks, scheduling, and live performance stats.",
+        challenge: "Marketing ran on a Google Sheet, a Drive of finished videos, and manual posting. Posts went out late, approvals were untracked, AI design tools invented fake logos, and 50 finished NFAMation videos sat unpublished.",
+        solution: "Built a full-stack TypeScript app on Railway that imports the content calendar every 15 minutes, autofills Canva brand templates, routes posts through a one-page client approval flow, schedules publishing per destination, and reports performance in one place.",
+        outcome: "Daily posting restarted the day the brief came in, a full week of posts was drafted from the client's own unused material in one sitting, and celebration posts are now designed, scheduled, and held for approval with a reversible pause instead of deletion.",
+        role: "Product design, full-stack development, Canva API automation, client approval workflow, daily content operations",
+        tech: ["TypeScript", "Node.js", "Vite", "Railway", "Canva API", "Meta Graph API", "YouTube API", "Google Sheets"],
+        features: ["15-minute sheet sync", "Canva brand-template autofill", "One-page client approval", "Per-destination pause and resume", "Birthday and anniversary automation", "Live performance stats", "Activity log and audit trail"],
+        caseDetails: [
+          ["Business problem", "Posts went out late or not at all, approvals were undocumented, and finished videos were never published."],
+          ["Automation objective", "Move every post from a planning sheet to a published, tracked item on Facebook, Instagram, and YouTube without the client in the loop for routine work."],
+          ["Trigger", "Scheduled sheet import every 15 minutes, plus birthday and anniversary dates from a second sheet checked against the live Instagram feed."],
+          ["Workflow", "Plan in Sheets -> design via Canva templates or API -> client approval page -> queue for 10:00 AM Central -> publish to Facebook Page and Instagram -> stats."],
+          ["Apps and APIs", "Canva Connect API (autofill, background removal, element edits), Meta Graph API, YouTube Data API, Google Sheets and Drive."],
+          ["AI features", "Written house-style specs per post type drive consistent generated graphics; headshots are pulled from the company website so no post waits on a photo."],
+          ["Human approval", "The client approves or requests changes from one page on his phone; decisions are stored and visible as live status."],
+          ["Error handling", "Failed publishes surface in the live feed with the provider message and can be retried; destinations can be paused independently."],
+          ["Security", "Client tokens stay server-side on Railway; the public repository contains the case study, screenshots, and walkthrough media only."],
+          ["Status", "Live for a real client; public repository documents the platform, posts shipped, and the approval loop."],
+          ["Repository", "Presidentkoko/ceshker-content-os"]
+        ],
+        live: "",
+        github: "https://github.com/Presidentkoko/ceshker-content-os",
+        private: false
+      },
+      {
+        slug: "fleet-intelligence-dashboard",
+        title: "Fleet Intelligence Dashboard",
+        kicker: "Samsara mileage + maintenance automation",
+        category: "Production Apps",
+        filters: ["Featured", "Production Apps", "Full-Stack Systems", "n8n Automation"],
+        featured: true,
+        spotlight: true,
+        spotlightSize: "large",
+        year: "2026",
+        client: "Fleet operator · USA",
+        image: "assets/images/products/samsara-overview.jpg",
+        gallery: ["assets/images/products/samsara-integrations.jpg", "assets/images/products/samsara-notifications.jpg"],
+        alt: "Fleet operations dashboard with active, due-soon, overdue, and healthy vehicle counts and a maintenance priority queue",
+        summary: "A fleet-maintenance command center that joins Samsara mileage, Supabase operational data, Telegram driver workflows, and a weekly reconciliation worker so administrators can see service urgency, integration health, and notification activity in one place.",
+        challenge: "Mileage lived in Samsara, maintenance rules needed trustworthy readings, driver follow-up happened in Telegram, and management had no proof that each automated step succeeded.",
+        solution: "Built a Next.js dashboard on Vercel with Supabase as the system of record, a scheduled Monday reconciliation worker, per-vehicle manual and test sync modes, audited service completion, and Telegram confirmations that never mutate data when a driver rejects.",
+        outcome: "Administrators get fleet-wide health counts, a priority queue ordered by miles overdue, per-run success and failure totals, and a maintenance history with actor, reading, source, and timestamp.",
+        role: "Product design, full-stack development, Samsara and Telegram integration, scheduling worker, audit model",
+        tech: ["Next.js", "TypeScript", "Supabase", "Vercel", "Samsara", "Telegram Bot API", "Cron worker"],
+        features: ["Weekly Samsara reconciliation", "Oil, transmission, and inspection schedules", "Priority queue by urgency", "Telegram driver confirmations", "Duplicate-suppressed notifications", "Run-detail audit pages", "Integration health panel"],
+        caseDetails: [
+          ["Business problem", "Teams missed thresholds, repeated reminders, overwrote trusted data after failed reads, and lost the history behind decisions."],
+          ["Automation objective", "Collect mileage, validate it, update the system of record, evaluate maintenance, contact the right person, and preserve the result."],
+          ["Trigger", "Scheduled worker every Monday at the configured Central Time slot, plus manual full-fleet and per-vehicle sync."],
+          ["Workflow", "Samsara extraction -> validation -> Supabase update -> maintenance evaluation -> Telegram notification -> run log."],
+          ["Apps and APIs", "Samsara, Supabase (Auth + Postgres), Telegram Bot API, Next.js route handlers on Vercel."],
+          ["Decision logic", "Mileage-based thresholds classify vehicles as healthy, due soon, due, or overdue and recalculate after every valid update."],
+          ["Error handling", "Failed extractions preserve the last trusted value; runs record completed, partial, and failed states with per-vehicle counts."],
+          ["Human approval", "Service completion is an audited action; a rejected Telegram confirmation never mutates a service record."],
+          ["Security", "Credentials and secrets stay in environment configuration; the public repository is a privacy-conscious case study with screenshots."],
+          ["Status", "Production application for a fleet operator; a 2.5-minute Loom walkthrough covers the dashboard and Telegram alerts."],
+          ["Repository", "Presidentkoko/Samsara-Milleage-Tracker-Automation"]
+        ],
+        walkthrough: "https://www.loom.com/share/07bc189410674f5aa90f2a6058bd7dd0",
+        live: "https://swoop-jarvis.vercel.app/",
+        github: "https://github.com/Presidentkoko/Samsara-Milleage-Tracker-Automation",
+        private: false
+      },
+      {
+        slug: "frameforge",
+        title: "FrameForge AI Documentary Pipeline",
+        kicker: "Scene-based AI video production",
+        category: "Production Apps",
+        filters: ["Featured", "Production Apps", "Full-Stack Systems", "UI/UX"],
+        featured: true,
+        spotlight: true,
+        year: "2026",
+        client: "Discovery with Ambrose · YouTube",
+        image: "assets/images/products/frameforge-scene-studio.jpg",
+        gallery: ["assets/images/products/frameforge-dashboard.jpg", "assets/images/products/frameforge-avatar.jpg"],
+        alt: "FrameForge scene planner listing avatar, video, and image scenes with visual direction and regenerate controls",
+        summary: "A private production workspace that turns a finished script and voiceover into a documentary-style video plan: AI proposes the scene breakdown, an editor classifies each scene as avatar, image, or video, edits every prompt, regenerates single assets, and decides when the timeline is ready to render.",
+        challenge: "Long-form documentary production was spread across disconnected tools, so one change meant restarting the whole plan and nobody could review render readiness in one place.",
+        solution: "Built a Next.js app with Supabase project and scene persistence, encrypted provider settings, Gemini scene planning, and provider contracts prepared for HeyGen avatars, Runway video, and Shotstack rendering.",
+        outcome: "A complete, locally testable vertical slice with a protected live deployment, a scene studio for per-scene direction and regeneration, and documented integration tracks for production rendering.",
+        role: "Product architecture, UI/UX, full-stack development, AI scene-planning integration, provider contracts, documentation",
+        tech: ["Next.js", "TypeScript", "Supabase", "Gemini", "HeyGen", "Runway", "Shotstack", "Vercel"],
+        features: ["AI scene plan from script", "Avatar / image / video classification", "Per-scene prompt editing", "Single-scene regeneration", "Render-readiness review", "Encrypted provider settings", "Company sign-in boundary"],
+        caseDetails: [
+          ["Business problem", "Narration-led documentaries needed a reviewable pipeline instead of a chain of separate AI tools and manual exports."],
+          ["Automation objective", "Take script plus voiceover to a classified, directed, regenerable scene timeline with captions and transitions."],
+          ["Workflow", "Script + voiceover -> AI scene plan -> classification -> per-scene generation and review -> captions and timeline -> render."],
+          ["Apps and APIs", "Supabase persistence, Gemini scene planning, HeyGen, Runway, and Shotstack contracts, optional open-source rendering worker."],
+          ["AI features", "Controlled automation: AI proposes scene types and visual direction, humans change types, edit prompts, and approve the render."],
+          ["Human approval", "Every scene can be retyped and re-prompted; an editor decides when the timeline is render-ready."],
+          ["Security", "The public URL exposes only an authenticated company sign-in; portfolio walkthroughs use a demo adapter and synthetic data."],
+          ["Status", "Vertical slice complete with Supabase schema and provider contracts; production render jobs await company-owned credentials."],
+          ["Repository", "Presidentkoko/FrameForge-AI-Documentary-Automation"]
+        ],
+        live: "https://frameforge-vpp.vercel.app/",
+        github: "https://github.com/Presidentkoko/FrameForge-AI-Documentary-Automation",
+        private: false
+      },
+      {
+        slug: "content-os-video-studio",
+        title: "Content OS Short-Form Video Studio",
+        kicker: "AI-assisted editing workspace",
+        category: "Production Apps",
+        filters: ["Featured", "Production Apps", "Full-Stack Systems", "UI/UX"],
+        featured: true,
+        spotlight: true,
+        year: "2026",
+        client: "Private workspace · Vercel",
+        image: "assets/images/products/contentos-create.jpg",
+        gallery: ["assets/images/products/contentos-library.jpg"],
+        alt: "Content OS create workspace with raw clip sequence, reel settings, and preview panel",
+        summary: "A password-protected workspace that turns raw footage into reviewed, downloadable short-form video: direct-to-private-storage uploads, local Whisper transcription, suggested cuts, reusable templates, styled captions, music ducking, and human-in-the-loop approval with live job progress.",
+        challenge: "Short-form production meant passing the same media between upload tools, transcription services, editors, template files, review links, and publishing folders, so status was unclear and small revisions became repetitive work.",
+        solution: "Built a Next.js front end with Supabase Storage and Postgres, a worker queue that records every processing stage, FFmpeg preparation, Remotion composition, and versioned templates with import and export.",
+        outcome: "One protected loop from upload to approved export, with a searchable library of Draft, Queued, Processing, Needs Review, Ready, Scheduled, Published, and Failed states.",
+        role: "Product design, full-stack development, media pipeline, template system, review workflow",
+        tech: ["Next.js", "Supabase", "FFmpeg", "Remotion", "Whisper", "Vercel"],
+        features: ["Multi-clip upload and trim", "Local Whisper transcription", "Suggested pause cuts", "Versioned templates", "Active-word captions", "Music ducking and fades", "Live processing overlay", "Approve, rerender, download"],
+        caseDetails: [
+          ["Business problem", "Fragmented tools made status unclear and turned small revisions into repeated manual work."],
+          ["Workflow", "Private clip upload -> Supabase records -> worker queue -> Whisper -> moment analysis -> human review -> FFmpeg -> template composition -> preview and versions -> approved asset."],
+          ["Apps and APIs", "Next.js on Vercel, Supabase Storage and Postgres, FFmpeg, Remotion, local Whisper."],
+          ["AI features", "Transcription and moment suggestion assist the editor; cuts, captions, crop, and copy remain human decisions."],
+          ["Error handling", "Jobs are retryable and every stage is recorded so the UI shows real progress instead of an indefinite spinner."],
+          ["Security", "Originals go straight to private storage; the public repository is the case study and architecture record only."],
+          ["Status", "Production-deployed private MVP with a public case study."],
+          ["Repository", "Presidentkoko/Content-OS-Automation"]
+        ],
+        live: "https://content-os-three-iota.vercel.app/create",
+        github: "https://github.com/Presidentkoko/Content-OS-Automation",
+        private: false
+      },
+      {
+        slug: "outreach-hiring-dashboard",
+        title: "Outreach Hiring Dashboard",
+        kicker: "Live recruiting analytics from a Google Sheet",
+        category: "Production Apps",
+        filters: ["Featured", "Production Apps", "Full-Stack Systems", "Web Development"],
+        featured: true,
+        spotlight: true,
+        year: "2026",
+        client: "Recruiting team · demo data",
+        image: "assets/images/products/outreach-dashboard.jpg",
+        alt: "Outreach Hiring dashboard header with live connection status and KPI cards",
+        summary: "A live dashboard that reads a Google Sheet of recruiting leads on every request, cleans it on the server, and shows six KPIs, a leads-per-week chart, a funnel, the weekly breakdown, and a live feed, refreshing itself every 30 seconds.",
+        challenge: "Recruiting stats lived in a spreadsheet with duplicate people, test rows, and four different date formats, so weekly counts were slow to produce and easy to get wrong.",
+        solution: "Built a Next.js app where the browser only calls one server route; the data layer merges duplicates by email then phone, drops test rows, parses mixed dates, and counts stages per Monday-to-Sunday Pacific week.",
+        outcome: "A phone-friendly dashboard with week-over-week change on every KPI, a swappable data source, and no credentials in the browser.",
+        role: "Architecture, data cleaning rules, Next.js development, deployment",
+        tech: ["Next.js", "TypeScript", "Google Sheets API", "Vercel"],
+        features: ["Server-side sheet reads", "Duplicate merge by email and phone", "Mixed date parsing", "Weekly KPIs with change", "Funnel and live feed", "30-second auto refresh", "Swappable data source"],
+        caseDetails: [
+          ["Workflow", "Browser -> /api/stats -> Google Sheets (service account or public CSV) -> clean -> weekly stats -> JSON."],
+          ["Decision logic", "Leads, abandoned quiz, and disqualified count in the week created; later stages count in the week dispositioned."],
+          ["Security", "The service-account key is read only inside the server route with a read-only scope; nothing sensitive reaches the browser."],
+          ["Status", "Live demo with fake data; swapping Google Sheets for the GoHighLevel API means adding one source file."],
+          ["Repository", "Presidentkoko/outreach-hiring-dashboard"]
+        ],
+        live: "https://outreach-hiring-dashboard.vercel.app",
+        github: "https://github.com/Presidentkoko/outreach-hiring-dashboard",
+        private: false
+      },
+      {
+        slug: "one-login",
+        title: "One Login",
+        kicker: "Money in, money out, profit for tradies",
+        category: "Production Apps",
+        filters: ["Featured", "Production Apps", "Full-Stack Systems", "UI/UX"],
+        featured: true,
+        spotlight: true,
+        year: "2026",
+        client: "Trades businesses · PWA",
+        image: "assets/images/products/one-login-home.jpg",
+        alt: "One Login sign-in screen with the headline Your whole month, one screen",
+        summary: "One login, one screen, one button: this month's money in, money out, and profit, green when you are in the black and red when you are not. Finish a job, tap Job done, and the numbers move straight away.",
+        challenge: "Tradies do not want accounting software; they want to know, in thirty seconds, whether the month is profitable.",
+        solution: "Built with Next.js 16 App Router, Supabase Auth and Postgres with row-level security, and Tailwind CSS 4, with optimistic updates, undo, recent-customer chips, cost presets, haptics, safe-area handling, and PWA install.",
+        outcome: "A phone-first app that passes the 30-second test and deliberately leaves out GST splits, invoices, charts, and settings so the one question stays fast to answer.",
+        role: "Product scoping, UX, full-stack development, Supabase schema and RLS",
+        tech: ["Next.js 16", "Supabase", "Tailwind CSS 4", "PostgreSQL RLS", "PWA", "Vercel"],
+        features: ["One-button sign in or sign up", "Live profit counter", "Job done flow with undo", "Optimistic sync with rollback", "Cost presets", "Phone-first PWA", "Row-level security"],
+        caseDetails: [
+          ["Decision logic", "Every row is locked to its owner by Postgres RLS so the browser never sees anyone else's data."],
+          ["Status", "Live on Vercel; schema and setup documented in the repository."],
+          ["Repository", "Presidentkoko/one-login"]
+        ],
+        live: "https://one-login.vercel.app",
+        github: "https://github.com/Presidentkoko/one-login",
+        private: false
+      },
       {
         slug: "ai-lead-qualification",
         title: "AI Lead Generation & Qualification System",
@@ -633,14 +863,27 @@
     ],
 
     skillGroups: [
-      { name: "Frontend & Experience", items: ["HTML", "CSS", "JavaScript", "React", "Vite", "Next.js", "Responsive UI", "Accessibility"] },
-      { name: "Backend & Data", items: ["Node.js", "Express", "Python", "Django", "PHP", "REST APIs", "PostgreSQL", "MySQL", "SQL Server", "Firebase"] },
-      { name: "Desktop & Engineering", items: ["Java", "C#", "VB.NET", ".NET / WinForms", "Networking", "IT Systems", "AutoCAD", "3D Modeling"] },
-      { name: "Growth & Creative", items: ["LinkedIn Management", "Social Media", "Content Strategy", "Canva", "CapCut", "GoHighLevel", "Video Editing", "Brand Content"] },
-      { name: "Automation & Delivery", items: ["n8n", "Workflow Automation", "Git", "GitHub", "Vercel", "WordPress", "Elementor", "Technical Documentation"] }
+      { name: "Frontend & Experience", items: ["Next.js", "React", "TypeScript", "JavaScript", "Tailwind CSS", "Vite", "HTML & CSS", "Responsive UI", "Accessibility", "PWA"] },
+      { name: "Backend & Data", items: ["Node.js", "Express", "Supabase", "PostgreSQL", "Row-level security", "Python", "PHP", "REST APIs", "Webhooks", "MySQL", "SQL Server", "MongoDB"] },
+      { name: "AI & Automation", items: ["n8n", "GoHighLevel", "Make", "Zapier", "Claude & Claude Code", "Gemini", "Whisper", "Canva API", "Telegram Bots", "Google Sheets API", "Scheduled workers"] },
+      { name: "Media & Content", items: ["FFmpeg", "Remotion", "Video Editing", "CapCut", "Canva", "YouTube Production", "Social Media Management", "Content Strategy", "Brand Content"] },
+      { name: "Delivery & Platforms", items: ["Vercel", "Railway", "GitHub", "WordPress", "Elementor", "Domains & DNS", "Documentation & Handover"] },
+      { name: "Desktop & Engineering", items: ["C#", ".NET / WinForms", "Java", "Networking", "IT Systems", "AutoCAD", "3D Modeling"] }
     ],
 
     experience: [
+      {
+        period: "2026 — Present",
+        role: "Full-Stack & AI Automation Developer",
+        organisation: "Client products · Next.js, Supabase, Railway, Vercel",
+        summary: "Shipped six production systems in 2026: a content operations platform for a Texas law and title firm, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
+      },
+      {
+        period: "2025 — Present",
+        role: "Social Media, YouTube & CRM Operations",
+        organisation: "Derek Smith Realty, Austin Investment Meetup, Ceshker Group, Dr. Edmund Hale",
+        summary: "Organising content, preparing captions and creative assets, reviewing posts, coordinating publishing, editing long-form and short-form video, and connecting lead generation to GoHighLevel pipelines and automations."
+      },
       {
         period: "2025 — 2027",
         role: "IT College Instructor",
@@ -671,6 +914,90 @@
         organisation: "Southern Leyte State University",
         summary: "Software, systems, electronics, networking, and a 600-hour industry placement covering computer assembly, installation, and networking."
       }
-    ]
+    ],
+
+    socialAccounts: [
+      { platform: "Instagram", handle: "@derekthedealsmith", name: "Derek the Deal Smith", url: "https://www.instagram.com/derekthedealsmith/", image: "assets/images/social/accounts/ig-derekthedealsmith.jpg", alt: "Instagram profile of Derek Smith, ATX real estate broker and meetup host", note: "ATX real estate broker and meetup host; listings, automations, reviews, and networking highlights." },
+      { platform: "Instagram", handle: "@austininvestmentmeetup", name: "Austin Investment Meetup", url: "https://www.instagram.com/austininvestmentmeetup/", image: "assets/images/social/accounts/ig-austininvestmentmeetup.jpg", alt: "Instagram profile of Austin Investment Meetup with event invitations", note: "Monthly investor meetup brand; event invitations, recap posts, and venue announcements." },
+      { platform: "Instagram", handle: "@ceshkergroup", name: "Ceshker Group Law & Title", url: "https://www.instagram.com/ceshkergroup/", image: "assets/images/social/accounts/ig-ceshkergroup.jpg", alt: "Instagram profile of Ceshker Group Law and Title Professionals", note: "Real-estate law and title firm; educational posts, polls, event coverage, and team celebrations." },
+      { platform: "Facebook", handle: "/ceshker", name: "Ceshker Group - Law and Title Professionals", url: "https://www.facebook.com/ceshker", image: "assets/images/social/accounts/fb-ceshker.jpg", alt: "Facebook page of Ceshker Group Law and Title Professionals", note: "Facebook Page paired with the Instagram feed through Content OS scheduling." },
+      { platform: "Facebook", handle: "Lake Travis Attorneys", name: "Lake Travis Attorneys", url: "https://www.facebook.com/profile.php?id=100080104120840", image: "assets/images/social/accounts/fb-lake-travis-attorneys.jpg", alt: "Facebook page of Lake Travis Attorneys", note: "Local legal-services page supported with profile setup and content coordination." },
+      { platform: "Facebook", handle: "Apex Aerial PH", name: "Apex Aerial PH", url: "", image: "assets/images/growth/apex-aerial-managed-page.webp", alt: "Apex Aerial PH Facebook page profile snapshot", note: "Brand content and page management for the aerial content service." },
+      { platform: "Facebook", handle: "Aliyanah Sambolawan_16", name: "Aliyanah Sambolawan_16", url: "", image: "assets/images/growth/aliyana-managed-page.webp", alt: "Aliyanah Sambolawan 16 Facebook page profile snapshot", note: "Facebook page management: profile setup, content, and publishing support." },
+      { platform: "Facebook", handle: "Business page", name: "Business Page", url: "https://www.facebook.com/profile.php?id=61578082510721", image: "", alt: "", note: "Managed business page; the page is restricted from public preview, so no screenshot is shown." }
+    ],
+
+    youtube: {
+      channel: {
+        name: "Dr. Edmund Hale",
+        handle: "@DrEdmundHale",
+        url: "https://www.youtube.com/@DrEdmundHale",
+        image: "assets/images/social/youtube/channel-dr-edmund-hale.jpg",
+        alt: "Dr. Edmund Hale YouTube channel page with recent nature documentary videos",
+        note: "Ecology and conservation documentary channel; long-form editing, thumbnails, titles, descriptions, and upload assets."
+      },
+      videos: [
+        { id: "lIXcZEZszQE", title: "They Flew 28 Bison Into a Valley That Hadn't Seen One in 100 Years", channel: "Dr. Edmund Hale" },
+        { id: "VcwvtOyvVEE", title: "Scientists Just Used AI to Decode the Language of Whales", channel: "Ambrose Wild" },
+        { id: "cc-lzj5YECU", title: "How the Netherlands Lives Below Sea Level Without Going Underwater", channel: "Ryan Lau Discovery" },
+        { id: "UvKIV5wI0F0", title: "25 “Illegal” Weapons American GIs Built From Scrap During World War II", channel: "Forgotten American Weapons" },
+        { id: "ORu-n1jb3RA", title: "25 “Outlawed” Self-Defense Weapons Every Appalachian Grandfather Carried", channel: "Forgotten American Weapons" },
+        { id: "X6hVKPefGbs", title: "Why The USS Arizona Can Never Be Raised", channel: "Forgotten Fleet" },
+        { id: "PXt27D79Dvg", title: "Cumberland Gap: The Highway America Erased", channel: "Old Alignment" }
+      ],
+      responsibilities: [
+        "Organising scripts, source files, voiceovers, footage, and final exports",
+        "Editing long-form and short-form video content",
+        "Reviewing visual quality, audio, captions, pacing, and synchronisation",
+        "Preparing titles, descriptions, thumbnails, and upload assets",
+        "Repurposing long-form videos into Shorts, Reels, and other social formats",
+        "Using AI tools for research, scripts, scene planning, captions, and media workflows",
+        "Maintaining approval and quality-control steps before publishing"
+      ]
+    },
+
+    ghl: {
+      areas: [
+        "Funnels, landing pages, forms, surveys, and calendars",
+        "Contacts, opportunities, pipelines, stages, tags, and custom fields",
+        "Email and SMS nurture sequences",
+        "Workflow triggers, conditions, waits, goals, and stop conditions",
+        "Lead assignment, notifications, task creation, and follow-up reminders",
+        "APIs, inbound and outbound webhooks, JSON payloads, and external integrations",
+        "Zapier, Make, and n8n connections",
+        "Custom HTML, CSS, and JavaScript for funnel improvements",
+        "Meta Pixel, conversion events, attribution, and tracking checks",
+        "Reusable templates, snapshots, documentation, and handover procedures"
+      ],
+      workflow: [
+        "Social post or advertisement",
+        "GHL landing page or lead form",
+        "Contact created or updated",
+        "Duplicate and required-field checks",
+        "Tag, source, campaign, and custom fields applied",
+        "Opportunity created in the correct pipeline",
+        "Lead assigned to the right team member",
+        "Email/SMS acknowledgement and internal notification",
+        "Appointment booking or follow-up sequence",
+        "Pipeline stage updates, reporting, and human review"
+      ],
+      method: [
+        "Map the business process before building the workflow.",
+        "Define the trigger, required data, ownership rules, and expected outcome.",
+        "Separate lead capture, qualification, follow-up, and reporting logic.",
+        "Add duplicate prevention, stop conditions, and exception handling.",
+        "Test forms, calendars, messages, webhooks, and stage changes with sample leads.",
+        "Confirm converted leads stop receiving inappropriate messages.",
+        "Document the workflow, connected services, recurring costs, and recovery steps."
+      ]
+    },
+
+    walkthrough: {
+      title: "Samsara Dashboard and Telegram Alert System",
+      url: "https://www.loom.com/share/07bc189410674f5aa90f2a6058bd7dd0",
+      image: "assets/images/products/loom-samsara-walkthrough.jpg",
+      alt: "Loom walkthrough thumbnail of the fleet dashboard and Telegram alert system",
+      duration: "2 min 31 sec"
+    }
   };
 })();

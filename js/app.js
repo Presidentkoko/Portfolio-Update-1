@@ -26,15 +26,119 @@
     social: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="12" r="3"/><circle cx="17" cy="6" r="3"/><circle cx="17" cy="18" r="3"/><path d="m10.5 10.5 4-3M10.5 13.5l4 3"/></svg>',
     pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m14 4 6 6L8 22H2v-6L14 4Z"/><path d="m12 6 6 6M3 16l5 5"/></svg>',
     video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="m17 10 5-3v10l-5-3v-4Z"/></svg>',
-    desktop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>'
+    desktop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+    funnel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h18l-7 8v6l-4 2v-8L3 4Z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>',
+    facebook: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8Z"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
   };
 
-  function initLoader() {
-    const loader = $("#loader");
-    if (!loader) return;
-    const hide = () => loader.classList.add("is-hidden");
-    window.addEventListener("load", () => window.setTimeout(hide, reducedMotion ? 0 : 450), { once: true });
-    window.setTimeout(hide, 2400);
+  function renderHeroStats() {
+    const target = $("#hero-stats");
+    if (!target || !data.stats) return;
+    target.innerHTML = data.stats.map((item) => `
+      <div><dt>${escapeHtml(item.label)}</dt><dd>${escapeHtml(item.value)}</dd></div>`).join("");
+  }
+
+  function renderTechStrip() {
+    const target = $("#tech-strip");
+    if (!target || !data.techStrip) return;
+    target.innerHTML = data.techStrip.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
+  }
+
+  function renderProducts() {
+    const target = $("#product-grid");
+    if (!target) return;
+    const products = data.projects.filter((project) => project.spotlight);
+    target.innerHTML = products.map((project, index) => `
+      <article class="product-card reveal${project.spotlightSize === "large" ? " product-card-large" : ""}" data-title="${escapeHtml(project.title)}">
+        <div class="product-media">
+          <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.alt)}" loading="${index < 2 ? "eager" : "lazy"}" width="1400" height="875">
+          <div class="product-badges">
+            <span>${escapeHtml(project.year || "2026")}</span>
+            ${project.live ? '<span class="is-live"><i></i>Live</span>' : '<span>Private deployment</span>'}
+          </div>
+        </div>
+        <div class="product-body">
+          <p class="product-kicker">${escapeHtml(project.client || project.kicker)}</p>
+          <h3>${escapeHtml(project.title)}</h3>
+          <p class="product-summary">${escapeHtml(project.summary)}</p>
+          <ul class="product-points">${project.features.slice(0, 3).map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
+          <div class="product-tech">${project.tech.slice(0, 5).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>
+          <div class="product-actions">
+            <button class="button button-primary product-details" type="button" data-slug="${escapeHtml(project.slug)}">Case study ${icons.arrow}</button>
+            ${project.live ? `<a class="button button-outline" href="${escapeHtml(project.live)}" target="_blank" rel="noreferrer">Live app ↗</a>` : ""}
+            ${project.github ? `<a class="button button-quiet" href="${escapeHtml(project.github)}" target="_blank" rel="noreferrer">GitHub ↗</a>` : ""}
+            ${project.walkthrough ? `<a class="button button-quiet" href="${escapeHtml(project.walkthrough)}" target="_blank" rel="noreferrer">Walkthrough ▶</a>` : ""}
+          </div>
+        </div>
+      </article>`).join("");
+    $$(".product-details").forEach((button) => button.addEventListener("click", () => openProject(button.dataset.slug)));
+  }
+
+  function renderOperations() {
+    const accounts = $("#account-grid");
+    if (accounts && data.socialAccounts) {
+      accounts.innerHTML = data.socialAccounts.map((account) => `
+        <article class="account-card${account.image ? "" : " account-card-empty"}">
+          ${account.image
+            ? (account.url
+              ? `<a class="account-media" href="${escapeHtml(account.url)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(account.name)} on ${escapeHtml(account.platform)}"><img src="${escapeHtml(account.image)}" alt="${escapeHtml(account.alt)}" loading="lazy" width="1400" height="900"></a>`
+              : `<div class="account-media"><img src="${escapeHtml(account.image)}" alt="${escapeHtml(account.alt)}" loading="lazy" width="1400" height="900"></div>`)
+            : `<div class="account-media account-media-placeholder" aria-hidden="true">${icons[account.platform.toLowerCase()] || icons.social}<span>Restricted preview</span></div>`}
+          <div class="account-body">
+            <p class="account-platform">${icons[account.platform.toLowerCase()] || icons.social}<span>${escapeHtml(account.platform)}</span><b>${escapeHtml(account.handle)}</b></p>
+            <h4>${escapeHtml(account.name)}</h4>
+            <p>${escapeHtml(account.note)}</p>
+            ${account.url ? `<a class="inline-link" href="${escapeHtml(account.url)}" target="_blank" rel="noreferrer">View page <span>↗</span></a>` : `<span class="inline-link account-snapshot">Supplied snapshot</span>`}
+          </div>
+        </article>`).join("");
+    }
+
+    const yt = data.youtube;
+    const channel = $("#youtube-channel");
+    if (channel && yt) {
+      channel.innerHTML = `
+        <a class="channel-card" href="${escapeHtml(yt.channel.url)}" target="_blank" rel="noreferrer">
+          <img src="${escapeHtml(yt.channel.image)}" alt="${escapeHtml(yt.channel.alt)}" loading="lazy" width="1400" height="1050">
+          <div class="channel-meta">
+            <span>${icons.youtube} YouTube channel</span>
+            <strong>${escapeHtml(yt.channel.name)}</strong>
+            <small>${escapeHtml(yt.channel.handle)} · ${escapeHtml(yt.channel.note)}</small>
+          </div>
+        </a>`;
+      $("#youtube-duties").innerHTML = yt.responsibilities.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      $("#video-grid").innerHTML = yt.videos.map((video) => `
+        <a class="video-card" href="https://www.youtube.com/watch?v=${escapeHtml(video.id)}" target="_blank" rel="noreferrer">
+          <span class="video-thumb"><img src="assets/images/social/youtube/${escapeHtml(video.id)}.jpg" alt="" loading="lazy" width="1280" height="720"><i>${icons.play}</i></span>
+          <strong>${escapeHtml(video.title)}</strong>
+          <small>${escapeHtml(video.channel)} · YouTube ↗</small>
+        </a>`).join("");
+    }
+
+    const ghl = data.ghl;
+    if (ghl && $("#ghl-areas")) {
+      $("#ghl-areas").innerHTML = ghl.areas.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      $("#ghl-flow").innerHTML = ghl.workflow.map((item, index) => `<li><b>${String(index + 1).padStart(2, "0")}</b><span>${escapeHtml(item)}</span></li>`).join("");
+      $("#ghl-method").innerHTML = ghl.method.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    }
+
+    const walkthrough = $("#walkthrough-card");
+    if (walkthrough && data.walkthrough) {
+      const item = data.walkthrough;
+      walkthrough.innerHTML = `
+        <a class="walkthrough-card" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">
+          <span class="walkthrough-thumb"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.alt)}" loading="lazy" width="1024" height="576"><i>${icons.play}</i></span>
+          <span class="walkthrough-copy">
+            <span class="section-kicker">Automation walkthrough · Loom · ${escapeHtml(item.duration)}</span>
+            <strong>${escapeHtml(item.title)}</strong>
+            <small>A recorded tour of the fleet dashboard, the weekly Samsara reconciliation, and the Telegram alert flow.</small>
+            <em>Watch on Loom ↗</em>
+          </span>
+        </a>`;
+    }
   }
 
   function renderValues() {
@@ -108,7 +212,7 @@
   }
 
   function renderProjectFilters() {
-    const categories = ["All", "Featured", "WordPress", "n8n Automation", "Web Development", "Full-Stack Systems", "UI/UX"];
+    const categories = ["All", "Featured", "Production Apps", "n8n Automation", "Full-Stack Systems", "Web Development", "WordPress", "UI/UX"];
     $("#project-filters").innerHTML = categories.map((category, index) => `
       <button class="filter-button${index === 0 ? " active" : ""}" type="button" data-filter="${escapeHtml(category)}" aria-pressed="${index === 0}">${escapeHtml(category)}</button>`).join("");
 
@@ -232,6 +336,7 @@
       </div>
       <div class="modal-body">
         <p class="modal-summary">${escapeHtml(project.summary)}</p>
+        ${project.gallery?.length ? `<div class="modal-gallery" aria-label="More screens">${project.gallery.map((src) => `<img src="${escapeHtml(src)}" alt="${escapeHtml(project.title)} screen" loading="lazy" width="1400" height="875">`).join("")}</div>` : ""}
         ${project.videos?.length ? `
           <section class="modal-video-showcase" id="modal-video-showcase" aria-labelledby="modal-video-heading" tabindex="0">
             <div class="modal-video-heading">
@@ -266,6 +371,7 @@
           ${projectLink(project.live, "Visit live site", true)}
           ${projectLink(project.github, "View GitHub")}
           ${project.download ? projectLink(project.download, "Download n8n workflow", true) : ""}
+          ${project.walkthrough ? projectLink(project.walkthrough, "Watch walkthrough") : ""}
           ${project.private && !project.download ? '<span class="private-label">Private project — public link intentionally omitted.</span>' : ""}
           <a class="button button-outline" href="#contact" data-project-type="${escapeHtml(project.title)}">Start a similar project</a>
         </div>
@@ -576,105 +682,6 @@
     }, 2600);
   }
 
-  function initCursor() {
-    if (window.matchMedia("(pointer: coarse)").matches || reducedMotion) return;
-    const dot = $("#cursor-dot");
-    const ring = $("#cursor-ring");
-    let pointerX = 0;
-    let pointerY = 0;
-    let ringX = 0;
-    let ringY = 0;
-    document.addEventListener("mousemove", (event) => {
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-      dot.style.opacity = "1";
-      ring.style.opacity = "1";
-      dot.style.transform = `translate(${pointerX - 3.5}px, ${pointerY - 3.5}px)`;
-    });
-    const moveRing = () => {
-      ringX += (pointerX - ringX) * .16;
-      ringY += (pointerY - ringY) * .16;
-      ring.style.transform = `translate(${ringX - ring.offsetWidth / 2}px, ${ringY - ring.offsetHeight / 2}px)`;
-      requestAnimationFrame(moveRing);
-    };
-    moveRing();
-    $$("a, button, input, select, textarea").forEach((element) => {
-      element.addEventListener("mouseenter", () => ring.classList.add("is-active"));
-      element.addEventListener("mouseleave", () => ring.classList.remove("is-active"));
-    });
-
-    $$(".magnetic").forEach((element) => {
-      element.addEventListener("mousemove", (event) => {
-        const rect = element.getBoundingClientRect();
-        const x = (event.clientX - rect.left - rect.width / 2) * .12;
-        const y = (event.clientY - rect.top - rect.height / 2) * .12;
-        element.style.transform = `translate(${x}px, ${y}px)`;
-      });
-      element.addEventListener("mouseleave", () => { element.style.transform = ""; });
-    });
-  }
-
-  function initHeroCanvas() {
-    if (reducedMotion) return;
-    const canvas = $("#hero-canvas");
-    if (!canvas) return;
-    const context = canvas.getContext("2d");
-    let width = 0;
-    let height = 0;
-    let particles = [];
-    let frame = 0;
-
-    const resize = () => {
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
-      canvas.width = Math.floor(width * ratio);
-      canvas.height = Math.floor(height * ratio);
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      const count = Math.max(22, Math.min(64, Math.floor(width / 24)));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - .5) * .16,
-        vy: (Math.random() - .5) * .16,
-        r: Math.random() * 1.4 + .5
-      }));
-    };
-
-    const draw = () => {
-      context.clearRect(0, 0, width, height);
-      particles.forEach((particle, index) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        if (particle.x < 0 || particle.x > width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > height) particle.vy *= -1;
-        context.beginPath();
-        context.fillStyle = "rgba(112, 173, 255, .54)";
-        context.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
-        context.fill();
-        for (let otherIndex = index + 1; otherIndex < particles.length; otherIndex += 1) {
-          const other = particles[otherIndex];
-          const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
-          if (distance > 115) continue;
-          context.beginPath();
-          context.strokeStyle = `rgba(73, 128, 225, ${.1 * (1 - distance / 115)})`;
-          context.moveTo(particle.x, particle.y);
-          context.lineTo(other.x, other.y);
-          context.stroke();
-        }
-      });
-      frame = requestAnimationFrame(draw);
-    };
-
-    resize();
-    draw();
-    window.addEventListener("resize", resize, { passive: true });
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) cancelAnimationFrame(frame);
-      else draw();
-    });
-  }
-
   function prefillProject(value) {
     const select = $("#projectType");
     const options = Array.from(select.options);
@@ -926,6 +933,13 @@
     openProject(window.location.hash.slice(6));
   }
 
+  function initCollapsibles() {
+    const compact = window.matchMedia("(max-width: 759px)");
+    const sync = () => $$("details.collapsible").forEach((item) => { item.open = !compact.matches; });
+    sync();
+    compact.addEventListener("change", sync);
+  }
+
   function initFooter() {
     $("#year").textContent = new Date().getFullYear();
     $("#availability-text").textContent = data.site.availability;
@@ -933,13 +947,16 @@
   }
 
   function boot() {
-    initLoader();
+    renderHeroStats();
+    renderTechStrip();
+    renderProducts();
     renderValues();
     renderServices();
     renderProjects();
     renderProjectFilters();
     renderSpecialisms();
     renderGrowth();
+    renderOperations();
     renderCreative();
     renderCreativeFilters();
     renderProcess();
@@ -948,12 +965,11 @@
     initNavigation();
     initIntroVideo();
     initRoleRotation();
-    initCursor();
-    initHeroCanvas();
     initDialogs();
     initProjectDeepLink();
     initProjectPrefill();
     initForm();
+    initCollapsibles();
     initFooter();
     initReveal();
   }
