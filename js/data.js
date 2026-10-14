@@ -873,10 +873,16 @@
 
     experience: [
       {
-        period: "2026 — Present",
-        role: "Full-Stack & AI Automation Developer",
-        organisation: "Client products · Next.js, Supabase, Railway, Vercel",
-        summary: "Shipped six production systems in 2026: a content operations platform for a Texas law and title firm, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
+        period: "2024 — Present",
+        role: "AI Automation Specialist",
+        organisation: "n8n, GoHighLevel, Supabase, Telegram, Canva and provider APIs",
+        summary: "Building lead qualification, SEO monitoring, booking, publishing, and fleet-reconciliation automations, plus the Content OS and FrameForge pipelines that connect AI tools to real client operations with human review."
+      },
+      {
+        period: "2022 — Present",
+        role: "Full-Stack Developer",
+        organisation: "Independent / client products · Next.js, Supabase, Railway, Vercel",
+        summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and in 2026 six production systems: a content operations platform, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
       },
       {
         period: "2025 — Present",
@@ -885,7 +891,7 @@
         summary: "Organising content, preparing captions and creative assets, reviewing posts, coordinating publishing, editing long-form and short-form video, and connecting lead generation to GoHighLevel pipelines and automations."
       },
       {
-        period: "2025 — 2027",
+        period: "2024 — 2026",
         role: "IT College Instructor",
         organisation: "College of Maasin · Southern Leyte",
         summary: "Teaching programming, object-oriented Java, networking, hardware systems, and information assurance through practical coursework and labs."
@@ -895,12 +901,6 @@
         role: "Founder & Aerial Content Creator",
         organisation: "Apex Aerial PH",
         summary: "Managing aerial capture, editing, campaign content, social publishing, and client coordination for events, properties, and promotions."
-      },
-      {
-        period: "2024 — Present",
-        role: "Full-Stack Developer",
-        organisation: "Independent / Client Projects",
-        summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and local-government management tools."
       },
       {
         period: "Project-based",
