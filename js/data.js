@@ -909,6 +909,12 @@
         summary: "Developing page positioning, content workflows, recruitment material, brand graphics, scheduling, and community-management routines."
       },
       {
+        period: "2017 — 2019",
+        role: "Automation Engineer",
+        organisation: "Diffuse Marketing Services · United Arab Emirates",
+        summary: "Built and maintained marketing and operations automations, connecting campaign tools, data sources, and reporting so repetitive work ran without manual handling."
+      },
+      {
         period: "Graduate",
         role: "BS in Computer Engineering",
         organisation: "Southern Leyte State University",
