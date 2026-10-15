@@ -873,10 +873,10 @@
 
     experience: [
       {
-        period: "2024 — Present",
-        role: "AI Automation Specialist",
-        organisation: "n8n, GoHighLevel, Supabase, Telegram, Canva and provider APIs",
-        summary: "Building lead qualification, SEO monitoring, booking, publishing, and fleet-reconciliation automations, plus the Content OS and FrameForge pipelines that connect AI tools to real client operations with human review."
+        period: "2017 — 2019",
+        role: "Automation Engineer",
+        organisation: "Diffuse Marketing Services · United Arab Emirates",
+        summary: "Built and maintained marketing and operations automations, connecting campaign tools, data sources, and reporting so repetitive work ran without manual handling."
       },
       {
         period: "2022 — Present",
@@ -885,16 +885,22 @@
         summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and in 2026 six production systems: a content operations platform, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
       },
       {
-        period: "2025 — Present",
-        role: "Social Media, YouTube & CRM Operations",
-        organisation: "Derek Smith Realty, Austin Investment Meetup, Ceshker Group, Dr. Edmund Hale",
-        summary: "Organising content, preparing captions and creative assets, reviewing posts, coordinating publishing, editing long-form and short-form video, and connecting lead generation to GoHighLevel pipelines and automations."
+        period: "2024 — Present",
+        role: "AI Automation Specialist",
+        organisation: "n8n, GoHighLevel, Supabase, Telegram, Canva and provider APIs",
+        summary: "Building lead qualification, SEO monitoring, booking, publishing, and fleet-reconciliation automations, plus the Content OS and FrameForge pipelines that connect AI tools to real client operations with human review."
       },
       {
         period: "2024 — 2026",
         role: "IT College Instructor",
         organisation: "College of Maasin · Southern Leyte",
         summary: "Teaching programming, object-oriented Java, networking, hardware systems, and information assurance through practical coursework and labs."
+      },
+      {
+        period: "2025 — Present",
+        role: "Social Media, YouTube & CRM Operations",
+        organisation: "Derek Smith Realty, Austin Investment Meetup, Ceshker Group, Dr. Edmund Hale",
+        summary: "Organising content, preparing captions and creative assets, reviewing posts, coordinating publishing, editing long-form and short-form video, and connecting lead generation to GoHighLevel pipelines and automations."
       },
       {
         period: "2025 — Present",
@@ -907,12 +913,6 @@
         role: "Growth & Social Media Manager",
         organisation: "Company-page and campaign work",
         summary: "Developing page positioning, content workflows, recruitment material, brand graphics, scheduling, and community-management routines."
-      },
-      {
-        period: "2017 — 2019",
-        role: "Automation Engineer",
-        organisation: "Diffuse Marketing Services · United Arab Emirates",
-        summary: "Built and maintained marketing and operations automations, connecting campaign tools, data sources, and reporting so repetitive work ran without manual handling."
       },
       {
         period: "Graduate",
