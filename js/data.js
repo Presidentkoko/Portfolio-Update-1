@@ -31,7 +31,7 @@
     ],
 
     stats: [
-      { value: "6", label: "Production apps shipped in 2026" },
+      { value: "7", label: "Production systems shipped in 2026" },
       { value: "4", label: "Verified n8n workflow case studies" },
       { value: "7+", label: "Client social and YouTube accounts supported" },
       { value: "PH", label: "Based in Southern Leyte, working worldwide" }
@@ -177,6 +177,42 @@
         live: "",
         github: "https://github.com/Presidentkoko/ceshker-content-os",
         private: false
+      },
+      {
+        slug: "besafe-ops-automation",
+        title: "BeSafe Ops: Property List Tracker & Automations Board",
+        kicker: "Operations automation for a property-inspection group",
+        category: "Production Apps",
+        filters: ["Featured", "Production Apps", "Full-Stack Systems", "n8n Automation"],
+        featured: true,
+        spotlight: true,
+        spotlightSize: "large",
+        year: "2026",
+        client: "BeSafe Group · Sydney, Australia",
+        image: "assets/images/products/besafe-property-list.jpg",
+        gallery: ["assets/images/products/besafe-ops-home.jpg"],
+        alt: "BeSafe Ops property list dashboard with pipeline, sold-check queue, and status controls (sample data)",
+        summary: "A Railway-hosted operations dashboard and a set of audited Make automations for a Sydney building-and-pest inspection company: the Property List tracker replaced a weekly Excel process, the automations board shows every scenario's health in one screen, and a report-release engine decides when inspection reports can go out.",
+        challenge: "The company ran on ServiceM8, Make, Xero, Stripe and a customer portal with 119 Make scenarios, a shared Excel list for vendor charges, and no single view of what was failing. Properties that sold quickly were never charged, 37 addresses had been charged twice, and the owner was fixing automations by hand.",
+        solution: "Audited every scenario read-only and delivered a prioritised fix register; built the Property List tracker (Bun + PostgreSQL on Railway) with portal imports, a fixed status pipeline, follow-up alerts, vendor-balance maths and a live dashboard; added an automations board with a Reports tab; and designed a report-release rules engine with ServiceM8, Xero and portal payment checks, credit-capped data feeds and scheduled reminders.",
+        outcome: "1,424 historical rows migrated, double charges and undated follow-ups surfaced, weekly sold checks run from one screen, and a tested release engine the owner approved step by step. Screenshots use the local sample-data build; client records are never shown.",
+        role: "Automation engineer (contract): audit, architecture, Bun/TypeScript development, Make scenario design, testing, documentation and owner reporting",
+        tech: ["Bun", "TypeScript", "PostgreSQL", "Railway", "Make", "ServiceM8 API", "Xero API", "Stripe"],
+        features: ["Property List tracker replacing Excel", "Weekly sold check with Likely-sold queue", "14-day and 7-day follow-up alerts", "Vendor balance and charge descriptions", "Automations health board", "Report-release rules engine (62 tests)", "Read-only Make audit of 119 scenarios"],
+        caseDetails: [
+          ["Business problem", "Vendor charges tracked in Excel, missed and duplicate charges, 119 Make scenarios with no central view of failures."],
+          ["Automation objective", "Replace the spreadsheet with a live tracker, make every automation's state visible, and automate report release safely."],
+          ["Workflow", "Portal CSV import -> Live -> weekly sold check -> agent requests -> charge new owner or vendor -> completed; Make events post to the Railway API."],
+          ["Apps and APIs", "Railway (Bun function + Postgres), Make, ServiceM8, Xero, Stripe, customer portal, Outlook shared inbox."],
+          ["Decision logic", "Outright, shared-cost and account clients; ServiceM8, Xero and portal payment checks; bank-transfer rule only when every source agrees."],
+          ["Error handling", "Daily credit caps with auto-suspend, retry of unmatched report emails, every decision logged with a reason."],
+          ["Human approval", "The owner approved each step; charging stays manual; nothing live changed without his OK."],
+          ["Security", "Read-only API tokens, secrets in Railway variables, no client data in logs or in this portfolio."],
+          ["Status", "In production use by the operations team; report-release engine running in read-only test mode."]
+        ],
+        live: "",
+        github: "",
+        private: true
       },
       {
         slug: "fleet-intelligence-dashboard",
@@ -882,7 +918,7 @@
         period: "2022 — Present",
         role: "Full-Stack Developer",
         organisation: "Independent / client products · Next.js, Supabase, Railway, Vercel",
-        summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and in 2026 six production systems: a content operations platform, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
+        summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and in 2026 seven production systems: a BeSafe operations tracker, a content operations platform, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
       },
       {
         period: "2024 — Present",
