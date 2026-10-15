@@ -963,7 +963,6 @@
     renderSkills();
     renderExperience();
     initNavigation();
-    initIntroVideo();
     initRoleRotation();
     initDialogs();
     initProjectDeepLink();

@@ -17,7 +17,7 @@ if (/href=["']#["']/.test(html)) failures.push("index.html contains a placeholde
 if (/Keshav Uppal/i.test(html + data + app)) failures.push("Prohibited name appears in public source.");
 if (/(4\+ years|100% client|fake analytics)/i.test(html + data)) failures.push("Unsupported marketing claim found.");
 if (/github\.com\/darkhorsepig/i.test(combined)) failures.push("An old GitHub username remains in the public portfolio.");
-for (const section of ["products", "meet", "projects", "automation", "wordpress", "operations", "experience", "contact"]) {
+for (const section of ["products", "projects", "automation", "wordpress", "operations", "experience", "contact"]) {
   if (!html.includes(`id="${section}"`)) failures.push(`Missing required section: ${section}`);
 }
 for (const filter of ["Featured", "Production Apps", "WordPress", "n8n Automation", "Web Development", "Full-Stack Systems", "UI/UX"]) {
@@ -55,19 +55,6 @@ for (const file of creativeFiles) {
   if (info.size > 600_000) failures.push(`Creative asset exceeds 600 KB: ${path.basename(file)}`);
 }
 
-const introAssets = [
-  ["assets/videos/intro-video.mp4", 25_000_000],
-  ["assets/images/intro-video-poster.webp", 500_000],
-  ["assets/videos/intro-video-captions.vtt", 100_000]
-];
-for (const [relative, maximum] of introAssets) {
-  try {
-    const info = await stat(path.join(root, ...relative.split("/")));
-    if (info.size > maximum) failures.push(`Intro asset exceeds ${Math.round(maximum / 1_000_000)} MB target: ${relative}`);
-  } catch {
-    failures.push(`Missing intro asset: ${relative}`);
-  }
-}
 
 if (failures.length) {
   console.error(failures.map((failure) => `- ${failure}`).join("\n"));
