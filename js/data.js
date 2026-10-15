@@ -179,8 +179,8 @@
         private: false
       },
       {
-        slug: "besafe-ops-automation",
-        title: "BeSafe Ops: Property List Tracker & Automations Board",
+        slug: "inspection-ops-automation",
+        title: "Inspection Ops: Property List Tracker & Automations Board",
         kicker: "Operations automation for a property-inspection group",
         category: "Production Apps",
         filters: ["Featured", "Production Apps", "Full-Stack Systems", "n8n Automation"],
@@ -188,11 +188,11 @@
         spotlight: true,
         spotlightSize: "large",
         year: "2026",
-        client: "BeSafe Group · Sydney, Australia",
-        image: "assets/images/products/besafe-property-list.jpg",
-        gallery: ["assets/images/products/besafe-ops-home.jpg"],
-        alt: "BeSafe Ops property list dashboard with pipeline, sold-check queue, and status controls (sample data)",
-        summary: "A Railway-hosted operations dashboard and a set of audited Make automations for a Sydney building-and-pest inspection company: the Property List tracker replaced a weekly Excel process, the automations board shows every scenario's health in one screen, and a report-release engine decides when inspection reports can go out.",
+        client: "Property-inspection group · Sydney, Australia",
+        image: "assets/images/products/inspection-ops-property-list.jpg",
+        gallery: ["assets/images/products/inspection-ops-home.jpg"],
+        alt: "Property list dashboard with pipeline, sold-check queue, and status controls (sample data)",
+        summary: "A Railway-hosted operations dashboard and a set of audited Make automations for an Australian property-inspection group: the Property List tracker replaced a weekly Excel process, the automations board shows every scenario's health in one screen, and a report-release engine decides when inspection reports can go out.",
         challenge: "The company ran on ServiceM8, Make, Xero, Stripe and a customer portal with 119 Make scenarios, a shared Excel list for vendor charges, and no single view of what was failing. Properties that sold quickly were never charged, 37 addresses had been charged twice, and the owner was fixing automations by hand.",
         solution: "Audited every scenario read-only and delivered a prioritised fix register; built the Property List tracker (Bun + PostgreSQL on Railway) with portal imports, a fixed status pipeline, follow-up alerts, vendor-balance maths and a live dashboard; added an automations board with a Reports tab; and designed a report-release rules engine with ServiceM8, Xero and portal payment checks, credit-capped data feeds and scheduled reminders.",
         outcome: "1,424 historical rows migrated, double charges and undated follow-ups surfaced, weekly sold checks run from one screen, and a tested release engine the owner approved step by step. Screenshots use the local sample-data build; client records are never shown.",
@@ -918,7 +918,7 @@
         period: "2022 — Present",
         role: "Full-Stack Developer",
         organisation: "Independent / client products · Next.js, Supabase, Railway, Vercel",
-        summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and in 2026 seven production systems: a BeSafe operations tracker, a content operations platform, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
+        summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and in 2026 seven production systems: an operations tracker for an Australian property-inspection group, a content operations platform, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
       },
       {
         period: "2024 — Present",
