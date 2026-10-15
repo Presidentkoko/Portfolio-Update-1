@@ -940,6 +940,175 @@
     compact.addEventListener("change", sync);
   }
 
+  const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false };
+  document.addEventListener("pointermove", (event) => {
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+    pointer.active = true;
+  }, { passive: true });
+  document.addEventListener("pointerleave", () => { pointer.active = false; });
+
+  function initBackground() {
+    const canvas = $("#bg-canvas");
+    if (!canvas || reducedMotion) return;
+    const context = canvas.getContext("2d");
+    let width = 0;
+    let height = 0;
+    let particles = [];
+    let frame = 0;
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+
+    const resize = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const count = Math.max(28, Math.min(coarse ? 40 : 90, Math.floor((width * height) / 16000)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - .5) * .25,
+        vy: (Math.random() - .5) * .25,
+        r: Math.random() * 1.6 + .6,
+        hue: Math.random() > .7 ? 190 : 220
+      }));
+    };
+
+    const draw = () => {
+      context.clearRect(0, 0, width, height);
+      const link = 130;
+      for (const particle of particles) {
+        if (pointer.active) {
+          const dx = particle.x - pointer.x;
+          const dy = particle.y - pointer.y;
+          const distance = Math.hypot(dx, dy) || 1;
+          if (distance < 180) {
+            const force = (180 - distance) / 180 * .06;
+            particle.vx += (dx / distance) * force;
+            particle.vy += (dy / distance) * force;
+          }
+        }
+        particle.vx *= .985;
+        particle.vy *= .985;
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        if (particle.x < -10) particle.x = width + 10;
+        if (particle.x > width + 10) particle.x = -10;
+        if (particle.y < -10) particle.y = height + 10;
+        if (particle.y > height + 10) particle.y = -10;
+        context.beginPath();
+        context.fillStyle = `hsla(${particle.hue}, 90%, 70%, .55)`;
+        context.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+        context.fill();
+      }
+      for (let i = 0; i < particles.length; i += 1) {
+        for (let j = i + 1; j < particles.length; j += 1) {
+          const a = particles[i];
+          const b = particles[j];
+          const distance = Math.hypot(a.x - b.x, a.y - b.y);
+          if (distance > link) continue;
+          context.beginPath();
+          context.strokeStyle = `rgba(99, 150, 255, ${.14 * (1 - distance / link)})`;
+          context.moveTo(a.x, a.y);
+          context.lineTo(b.x, b.y);
+          context.stroke();
+        }
+        if (pointer.active) {
+          const p = particles[i];
+          const distance = Math.hypot(p.x - pointer.x, p.y - pointer.y);
+          if (distance < 200) {
+            context.beginPath();
+            context.strokeStyle = `rgba(34, 211, 238, ${.25 * (1 - distance / 200)})`;
+            context.moveTo(p.x, p.y);
+            context.lineTo(pointer.x, pointer.y);
+            context.stroke();
+          }
+        }
+      }
+      frame = requestAnimationFrame(draw);
+    };
+
+    resize();
+    draw();
+    window.addEventListener("resize", resize, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) cancelAnimationFrame(frame);
+      else draw();
+    });
+  }
+
+  function initInteractive() {
+    if (reducedMotion) return;
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    const orbs = $(".bg-orbs");
+    const heroVisual = $(".hero-visual");
+    const labels = $$(".visual-label");
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    const tick = () => {
+      currentX += (targetX - currentX) * .06;
+      currentY += (targetY - currentY) * .06;
+      if (orbs) orbs.style.transform = `translate(${currentX * 40}px, ${currentY * 40}px)`;
+      if (heroVisual) heroVisual.style.transform = `translate(${currentX * -14}px, ${currentY * -10}px)`;
+      labels.forEach((label, index) => { label.style.transform = `translate(${currentX * (index ? 22 : -22)}px, ${currentY * (index ? 16 : -16)}px)`; });
+      requestAnimationFrame(tick);
+    };
+    document.addEventListener("pointermove", (event) => {
+      targetX = (event.clientX / window.innerWidth - .5);
+      targetY = (event.clientY / window.innerHeight - .5);
+    }, { passive: true });
+    tick();
+
+    if (!fine) return;
+
+    const cardSelector = ".product-card, .service-card, .account-card, .specialism-card, .value-card, .timeline-item, .skill-group, .process-card, .ghl-areas, .ghl-board, .ghl-method, .youtube-copy, .channel-card, .walkthrough-card, .about-panel, .growth-board, .contact-form, .video-card, .creative-item, .project-card, .hero-stats > div";
+    document.addEventListener("pointermove", (event) => {
+      const card = event.target.closest(cardSelector);
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      card.style.setProperty("--mx", `${x}px`);
+      card.style.setProperty("--my", `${y}px`);
+      if (rect.width < 720 && !card.matches(".contact-form, .project-card, .growth-board, .ghl-board")) {
+        const tiltX = ((y / rect.height) - .5) * -5;
+        const tiltY = ((x / rect.width) - .5) * 6;
+        card.style.setProperty("--tilt", `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`);
+      }
+    }, { passive: true });
+    document.addEventListener("pointerout", (event) => {
+      const card = event.target.closest(cardSelector);
+      if (card && !card.contains(event.relatedTarget)) card.style.removeProperty("--tilt");
+    });
+
+    $$(".button-primary, .project-arrows button, .social-arrow, .menu-toggle").forEach((element) => {
+      element.addEventListener("pointermove", (event) => {
+        const rect = element.getBoundingClientRect();
+        const x = (event.clientX - rect.left - rect.width / 2) * .18;
+        const y = (event.clientY - rect.top - rect.height / 2) * .18;
+        element.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      element.addEventListener("pointerleave", () => { element.style.transform = ""; });
+    });
+
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest(".button, .filter-button, .skill-tags span");
+      if (!button) return;
+      const rect = button.getBoundingClientRect();
+      const ripple = document.createElement("span");
+      ripple.className = "ripple";
+      ripple.style.left = `${event.clientX - rect.left}px`;
+      ripple.style.top = `${event.clientY - rect.top}px`;
+      button.appendChild(ripple);
+      ripple.addEventListener("animationend", () => ripple.remove());
+    });
+  }
+
   function initFooter() {
     $("#year").textContent = new Date().getFullYear();
     $("#availability-text").textContent = data.site.availability;
@@ -969,6 +1138,8 @@
     initProjectPrefill();
     initForm();
     initCollapsibles();
+    initBackground();
+    initInteractive();
     initFooter();
     initReveal();
   }
