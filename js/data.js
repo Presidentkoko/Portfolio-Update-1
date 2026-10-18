@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   "use strict";
 
   window.PORTFOLIO_DATA = {
@@ -150,7 +150,7 @@
         spotlight: true,
         spotlightSize: "large",
         year: "2026",
-        client: "Ceshker Group Â· Texas",
+        client: "Ceshker Group · Texas",
         image: "assets/images/products/ceshker-command-center.jpg",
         gallery: ["assets/images/products/ceshker-calendar.jpg", "assets/images/products/ceshker-performance.jpg"],
         alt: "Content OS command center dashboard showing content overview, live feed, channels, and pipeline health",
@@ -188,7 +188,7 @@
         spotlight: true,
         spotlightSize: "large",
         year: "2026",
-        client: "Property-inspection group Â· Sydney, Australia",
+        client: "Property-inspection group · Sydney, Australia",
         image: "assets/images/products/inspection-ops-property-list.jpg",
         gallery: ["assets/images/products/inspection-ops-home.jpg"],
         alt: "Property list dashboard with pipeline, sold-check queue, and status controls (sample data)",
@@ -224,7 +224,7 @@
         spotlight: true,
         spotlightSize: "large",
         year: "2026",
-        client: "Fleet operator Â· USA",
+        client: "Fleet operator · USA",
         image: "assets/images/products/samsara-overview.jpg",
         gallery: ["assets/images/products/samsara-integrations.jpg", "assets/images/products/samsara-notifications.jpg"],
         alt: "Fleet operations dashboard with active, due-soon, overdue, and healthy vehicle counts and a maintenance priority queue",
@@ -262,7 +262,7 @@
         featured: true,
         spotlight: true,
         year: "2026",
-        client: "Discovery with Ambrose Â· YouTube",
+        client: "Discovery with Ambrose · YouTube",
         image: "assets/images/products/frameforge-scene-studio.jpg",
         gallery: ["assets/images/products/frameforge-dashboard.jpg", "assets/images/products/frameforge-avatar.jpg"],
         alt: "FrameForge scene planner listing avatar, video, and image scenes with visual direction and regenerate controls",
@@ -297,7 +297,7 @@
         featured: true,
         spotlight: true,
         year: "2026",
-        client: "Private workspace Â· Vercel",
+        client: "Private workspace · Vercel",
         image: "assets/images/products/contentos-create.jpg",
         gallery: ["assets/images/products/contentos-library.jpg"],
         alt: "Content OS create workspace with raw clip sequence, reel settings, and preview panel",
@@ -331,7 +331,7 @@
         featured: true,
         spotlight: true,
         year: "2026",
-        client: "Recruiting team Â· demo data",
+        client: "Recruiting team · demo data",
         image: "assets/images/products/outreach-dashboard.jpg",
         alt: "Outreach Hiring dashboard header with live connection status and KPI cards",
         summary: "A live dashboard that reads a Google Sheet of recruiting leads on every request, cleans it on the server, and shows six KPIs, a leads-per-week chart, a funnel, the weekly breakdown, and a live feed, refreshing itself every 30 seconds.",
@@ -361,7 +361,7 @@
         featured: true,
         spotlight: true,
         year: "2026",
-        client: "Trades businesses Â· PWA",
+        client: "Trades businesses · PWA",
         image: "assets/images/products/one-login-home.jpg",
         alt: "One Login sign-in screen with the headline Your whole month, one screen",
         summary: "One login, one screen, one button: this month's money in, money out, and profit, green when you are in the black and red when you are not. Finish a job, tap Job done, and the numbers move straight away.",
@@ -703,7 +703,7 @@
         featured: true,
         image: "assets/images/pos/nexuspos-register.png",
         alt: "NexusPOS browser-based retail register and checkout interface",
-        summary: "A responsive, offline-first point-of-sale application for retail, restaurants, cafÃ©s, salons, groceries, and other shop formats.",
+        summary: "A responsive, offline-first point-of-sale application for retail, restaurants, cafés, salons, groceries, and other shop formats.",
         challenge: "Small businesses need capable checkout and reporting tools without depending on a hosted backend, complex setup, or a permanent internet connection.",
         solution: "Built a dependency-free browser application with a configurable register, catalogue, customers, loyalty, sales history, reports, staff access, and local backup workflows.",
         outcome: "A portable POS experience that runs locally, adapts to multiple business types, and keeps day-to-day selling and operational data in one interface.",
@@ -909,37 +909,37 @@
 
     experience: [
       {
-        period: "2017 â€” 2019",
+        period: "2017 — 2019",
         role: "Automation Engineer",
-        organisation: "Diffuse Marketing Services Â· United Arab Emirates",
+        organisation: "Diffuse Marketing Services · Abu Dhabi, United Arab Emirates",
         summary: "Built and maintained marketing and operations automations, connecting campaign tools, data sources, and reporting so repetitive work ran without manual handling."
       },
       {
-        period: "2022 â€” Present",
+        period: "2022 — Present",
         role: "Full-Stack Developer",
-        organisation: "Independent / client products Â· Next.js, Supabase, Railway, Vercel",
+        organisation: "Independent / client products · Next.js, Supabase, Railway, Vercel",
         summary: "Designing and delivering booking platforms, company websites, dashboards, POS systems, and in 2026 seven production systems: an operations tracker for an Australian property-inspection group, a content operations platform, a fleet-maintenance command center, an AI documentary pipeline, a short-form video studio, a live recruiting dashboard, and a phone-first profit tracker."
       },
       {
-        period: "2024 â€” Present",
+        period: "2024 — Present",
         role: "AI Automation Specialist",
         organisation: "n8n, GoHighLevel, Supabase, Telegram, Canva and provider APIs",
         summary: "Building lead qualification, SEO monitoring, booking, publishing, and fleet-reconciliation automations, plus the Content OS and FrameForge pipelines that connect AI tools to real client operations with human review."
       },
       {
-        period: "2024 â€” 2026",
+        period: "2024 — 2026",
         role: "IT College Instructor",
-        organisation: "College of Maasin Â· Southern Leyte",
+        organisation: "College of Maasin · Southern Leyte",
         summary: "Teaching programming, object-oriented Java, networking, hardware systems, and information assurance through practical coursework and labs."
       },
       {
-        period: "2025 â€” Present",
+        period: "2025 — Present",
         role: "Social Media, YouTube & CRM Operations",
         organisation: "Derek Smith Realty, Austin Investment Meetup, Ceshker Group, Dr. Edmund Hale",
         summary: "Organising content, preparing captions and creative assets, reviewing posts, coordinating publishing, editing long-form and short-form video, and connecting lead generation to GoHighLevel pipelines and automations."
       },
       {
-        period: "2025 â€” Present",
+        period: "2025 — Present",
         role: "Founder & Aerial Content Creator",
         organisation: "Apex Aerial PH",
         summary: "Managing aerial capture, editing, campaign content, social publishing, and client coordination for events, properties, and promotions."
@@ -982,8 +982,8 @@
         { id: "lIXcZEZszQE", title: "They Flew 28 Bison Into a Valley That Hadn't Seen One in 100 Years", channel: "Dr. Edmund Hale" },
         { id: "VcwvtOyvVEE", title: "Scientists Just Used AI to Decode the Language of Whales", channel: "Ambrose Wild" },
         { id: "cc-lzj5YECU", title: "How the Netherlands Lives Below Sea Level Without Going Underwater", channel: "Ryan Lau Discovery" },
-        { id: "UvKIV5wI0F0", title: "25 â€œIllegalâ€ Weapons American GIs Built From Scrap During World War II", channel: "Forgotten American Weapons" },
-        { id: "ORu-n1jb3RA", title: "25 â€œOutlawedâ€ Self-Defense Weapons Every Appalachian Grandfather Carried", channel: "Forgotten American Weapons" },
+        { id: "UvKIV5wI0F0", title: "25 “Illegal” Weapons American GIs Built From Scrap During World War II", channel: "Forgotten American Weapons" },
+        { id: "ORu-n1jb3RA", title: "25 “Outlawed” Self-Defense Weapons Every Appalachian Grandfather Carried", channel: "Forgotten American Weapons" },
         { id: "X6hVKPefGbs", title: "Why The USS Arizona Can Never Be Raised", channel: "Forgotten Fleet" },
         { id: "PXt27D79Dvg", title: "Cumberland Gap: The Highway America Erased", channel: "Old Alignment" }
       ],
