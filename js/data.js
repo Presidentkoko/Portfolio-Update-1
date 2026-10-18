@@ -13,7 +13,7 @@
       github: "https://github.com/Presidentkoko",
       linkedin: "https://www.linkedin.com/in/jeruz-laynell-garde-413145369/",
       upwork: "https://www.upwork.com/freelancers/~0151ea079618e266d2",
-      cv: "assets/docs/Jeruz-Garde-Resume.pdf",
+      cv: "assets/docs/Jeruz-Garde-Resume-UAE-2026-10.pdf",
       portfolioPdf: "assets/docs/Jeruz-Garde-Portfolio.pdf",
       availability: "Available for selected freelance projects"
     },
