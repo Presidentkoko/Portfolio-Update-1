@@ -12,6 +12,7 @@
       location: "Maasin City, Southern Leyte, Philippines",
       github: "https://github.com/Presidentkoko",
       linkedin: "https://www.linkedin.com/in/jeruz-laynell-garde-413145369/",
+      bayt: "https://people.bayt.com/jeruz-laynell-garde-93498059/",
       upwork: "https://www.upwork.com/freelancers/~0151ea079618e266d2",
       cv: "assets/docs/Jeruz-Garde-Resume-UAE-2026-10b.pdf",
       portfolioPdf: "assets/docs/Jeruz-Garde-Portfolio.pdf",
